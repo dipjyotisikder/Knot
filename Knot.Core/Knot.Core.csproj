@@ -1,7 +1,103 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-  </PropertyGroup>
+	<PropertyGroup>
+		<!-- Target Framework -->
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<LangVersion>latest</LangVersion>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>disable</ImplicitUsings>
+
+		<!-- Assembly Information -->
+		<AssemblyName>Knot</AssemblyName>
+		<RootNamespace>Knot</RootNamespace>
+		<AssemblyVersion>2.0.0.0</AssemblyVersion>
+		<FileVersion>2.0.0.0</FileVersion>
+		<NeutralLanguage>en</NeutralLanguage>
+
+		<!-- Package Metadata -->
+		<PackageId>Knot</PackageId>
+		<Version>2.0.0</Version>
+		<Title>Knot - Object-to-Object Mapper for .NET</Title>
+		<Authors>Dipjyoti Sikder</Authors>
+		<Company>Dipjyoti</Company>
+		<Product>Knot</Product>
+		<Description>A lightweight and efficient object-to-object mapping library for .NET Standard 2.0. Knot simplifies the mapping of properties between different types with minimal configuration. Features include type mapping, custom converters, mapping profiles, extension methods, and optimized performance through expression compilation.</Description>
+		<Summary>Lightweight object-to-object mapper for .NET with minimal configuration</Summary>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+		<Copyright>Copyright (c) Dipjyoti Sikder 2025</Copyright>
+
+		<!-- Package Links -->
+		<PackageProjectUrl>https://github.com/dipjyotisikder/Knot</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/dipjyotisikder/Knot</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageIcon>logo.png</PackageIcon>
+
+		<!-- Package Tags -->
+		<PackageTags>mapper;mapping;object-mapper;automapper;knot;dto;entity;transformation;converter;profile;netstandard;performance</PackageTags>
+
+		<!-- Release Notes -->
+		<PackageReleaseNotes>
+			Version 2.0.0:
+			- Lightweight object-to-object mapping with minimal configuration
+			- Type mapping with automatic property matching
+			- Custom property mappings and transformations
+			- Support for mapping profiles to organize configurations
+			- Custom type converters for complex transformations
+			- Extension methods for fluent mapping syntax
+			- Collection mapping support (List, Array, IEnumerable)
+			- Optimized performance with compiled expressions
+			- Comprehensive error handling with specific exceptions
+			- Full .NET Standard 2.0 compatibility
+		</PackageReleaseNotes>
+
+		<!-- Build Configuration -->
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<Deterministic>true</Deterministic>
+		<ContinuousIntegrationBuild Condition="'$(CI)' == 'true'">true</ContinuousIntegrationBuild>
+
+		<!-- Code Analysis -->
+		<EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+		<AnalysisLevel>latest</AnalysisLevel>
+		<TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+		<NoWarn>$(NoWarn);1591;CS8632</NoWarn>
+
+		<!-- Optimization -->
+		<Optimize>true</Optimize>
+		<DebugType>embedded</DebugType>
+		<DebugSymbols>true</DebugSymbols>
+
+		<!-- Source Link Support -->
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<IncludeSymbols>true</IncludeSymbols>
+	</PropertyGroup>
+
+	<!-- Package References for Source Link -->
+	<ItemGroup>
+		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
+	</ItemGroup>
+
+	<!-- Package Files -->
+	<ItemGroup>
+		<None Include="..\README.md" Pack="true" PackagePath="\" />
+		<None Include="Assets\logo.png" Pack="true" PackagePath="\" />
+		<None Include="..\LICENSE" Pack="true" PackagePath="\" Condition="Exists('..\LICENSE')" />
+	</ItemGroup>
+
+	<!-- Assembly Attributes -->
+	<ItemGroup>
+		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+			<_Parameter1>Knot.Tests</_Parameter1>
+		</AssemblyAttribute>
+		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+			<_Parameter1>Knot.Benchmarks</_Parameter1>
+		</AssemblyAttribute>
+	</ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-namespace Knot.Core.Knot.Core
+namespace Knot
 {
     /// <summary>
     /// Defines the contract for mapping objects between different types.

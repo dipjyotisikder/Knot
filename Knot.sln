@@ -5,6 +5,8 @@ VisualStudioVersion = 17.14.36623.8 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Knot.Core", "Knot.Core\Knot.Core.csproj", "{68562626-4F39-4A74-832A-1362677062DC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Knot.Benchmarks", "Knot.Benchmarks\Knot.Benchmarks.csproj", "{91F14879-F135-2490-EE97-0E63ABAFEBFE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{68562626-4F39-4A74-832A-1362677062DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68562626-4F39-4A74-832A-1362677062DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{68562626-4F39-4A74-832A-1362677062DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91F14879-F135-2490-EE97-0E63ABAFEBFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91F14879-F135-2490-EE97-0E63ABAFEBFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91F14879-F135-2490-EE97-0E63ABAFEBFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91F14879-F135-2490-EE97-0E63ABAFEBFE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,9 +1,9 @@
-using Knot.Core.Configuration;
-using Knot.Core.Exceptions;
-using Knot.Core.Mapping;
+using Knot.Configuration;
+using Knot.Exceptions;
+using Knot.Mapping;
 using System;
 
-namespace Knot.Core.Knot.Core
+namespace Knot
 {
     /// <summary>
     /// The main mapping engine implementation.
@@ -16,7 +16,7 @@ namespace Knot.Core.Knot.Core
         /// Initializes a new instance of the MapperEngine class.
         /// </summary>
         /// <param name="registry">The mapping registry to use.</param>
-        public MapperEngine(MappingRegistry registry)
+        internal MapperEngine(MappingRegistry registry)
         {
             _registry = registry ?? throw new ArgumentNullException(nameof(registry));
         }
@@ -24,7 +24,7 @@ namespace Knot.Core.Knot.Core
         /// <summary>
         /// Gets the mapping registry containing all registered type mappings.
         /// </summary>
-        public MappingRegistry Registry => _registry;
+        MappingRegistry IMappingEngine.Registry => _registry;
 
         /// <summary>
         /// Maps the source object to a new destination object.
@@ -40,7 +40,7 @@ namespace Knot.Core.Knot.Core
             var destinationType = typeof(TDestination);
 
             var context = new MappingContext(source, sourceType, destinationType);
-            return (TDestination)Execute(context);
+            return (TDestination)((IMappingEngine)this).Execute(context);
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace Knot.Core.Knot.Core
             }
 
             var context = new MappingContext(source, typeof(TSource), typeof(TDestination));
-            return (TDestination)Execute(context);
+            return (TDestination)((IMappingEngine)this).Execute(context);
         }
 
         /// <summary>
@@ -67,14 +67,19 @@ namespace Knot.Core.Knot.Core
                 return destination;
             }
 
+            if (destination == null)
+            {
+                throw new ArgumentNullException(nameof(destination), "Destination cannot be null when mapping to an existing instance.");
+            }
+
             var context = new MappingContext(source, typeof(TSource), typeof(TDestination), destination);
-            return (TDestination)Execute(context);
+            return (TDestination)((IMappingEngine)this).Execute(context);
         }
 
         /// <summary>
         /// Executes a mapping operation using the provided mapping context.
         /// </summary>
-        public object Execute(MappingContext context)
+        object IMappingEngine.Execute(MappingContext context)
         {
             if (context == null)
             {
@@ -84,7 +89,8 @@ namespace Knot.Core.Knot.Core
             var typeMap = _registry.GetTypeMap(context.SourceType, context.DestinationType);
             if (typeMap == null)
             {
-                throw new MappingException($"No mapping found from {context.SourceType.Name} to {context.DestinationType.Name}");
+                throw new MappingException($"No mapping found from {context.SourceType.Name} to {context.DestinationType.Name}. " +
+                    $"Ensure that CreateMap<{context.SourceType.Name}, {context.DestinationType.Name}>() has been called during configuration.");
             }
 
             return typeMap.Execute(context);

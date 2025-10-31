@@ -1,6 +1,6 @@
 using System;
 
-namespace Knot.Core.Configuration
+namespace Knot.Configuration
 {
     /// <summary>
     /// Base class for custom type converters.
@@ -12,38 +12,42 @@ namespace Knot.Core.Configuration
         /// <summary>
         /// Gets the source type.
         /// </summary>
-      public override Type SourceType => typeof(TSource);
+        public override Type SourceType => typeof(TSource);
 
         /// <summary>
         /// Gets the destination type.
-    /// </summary>
-      public override Type DestinationType => typeof(TDestination);
+        /// </summary>
+        public override Type DestinationType => typeof(TDestination);
 
         /// <summary>
-      /// Converts the source value to the destination type.
+        /// Converts the source value to the destination type.
         /// </summary>
         /// <param name="source">The source value.</param>
-     /// <returns>The converted destination value.</returns>
+        /// <returns>The converted destination value.</returns>
         public abstract TDestination Convert(TSource source);
 
         /// <summary>
         /// Converts the source value to the destination type.
- /// </summary>
+        /// </summary>
         /// <param name="source">The source value.</param>
-    /// <returns>The converted destination value.</returns>
+        /// <returns>The converted destination value.</returns>
         public override object Convert(object source)
         {
             if (source == null)
-            return default(TDestination);
+            {
+                return default(TDestination);
+            }
 
             if (!(source is TSource typedSource))
-   throw new ArgumentException($"Source must be of type {typeof(TSource).Name}", nameof(source));
+            {
+                throw new ArgumentException($"Source must be of type {typeof(TSource).Name}", nameof(source));
+            }
 
             return Convert(typedSource);
         }
     }
 
- /// <summary>
+    /// <summary>
     /// Abstract base class for type converters.
     /// </summary>
     public abstract class TypeConverter
@@ -55,14 +59,14 @@ namespace Knot.Core.Configuration
 
         /// <summary>
         /// Gets the destination type.
-   /// </summary>
+        /// </summary>
         public abstract Type DestinationType { get; }
 
         /// <summary>
         /// Converts the source value to the destination type.
-  /// </summary>
+        /// </summary>
         /// <param name="source">The source value.</param>
-  /// <returns>The converted destination value.</returns>
+        /// <returns>The converted destination value.</returns>
         public abstract object Convert(object source);
     }
 }
