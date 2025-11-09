@@ -413,7 +413,7 @@ If you encounter any issues or have questions:
 
 ## Changelog
 
-### Version 2.0.0
+### Version 1.0.0
 
 - Initial release of Knot
 - Type mapping with custom property configuration
