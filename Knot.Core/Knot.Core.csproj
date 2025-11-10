@@ -10,13 +10,13 @@
 		<!-- Assembly Information -->
 		<AssemblyName>Knot</AssemblyName>
 		<RootNamespace>Knot</RootNamespace>
-		<AssemblyVersion>2.0.0.0</AssemblyVersion>
-		<FileVersion>2.0.0.0</FileVersion>
+		<AssemblyVersion>1.0.0.0</AssemblyVersion>
+		<FileVersion>1.0.0.0</FileVersion>
 		<NeutralLanguage>en</NeutralLanguage>
 
 		<!-- Package Metadata -->
 		<PackageId>Knot</PackageId>
-		<Version>2.0.0</Version>
+		<Version>1.0.0</Version>
 		<Title>Knot - Object-to-Object Mapper for .NET</Title>
 		<Authors>Dipjyoti Sikder</Authors>
 		<Company>Dipjyoti</Company>
@@ -39,7 +39,7 @@
 
 		<!-- Release Notes -->
 		<PackageReleaseNotes>
-			Version 2.0.0:
+			Version 1.0.0:
 			- Lightweight object-to-object mapping with minimal configuration
 			- Type mapping with automatic property matching
 			- Custom property mappings and transformations
