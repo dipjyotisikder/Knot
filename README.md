@@ -39,6 +39,7 @@ A lightweight and efficient object-to-object mapping library for .NET Standard 2
     -   [IMapper Interface](#imapper-interface)
     -   [Profile Class](#profile-class)
     -   [TypeConverter Class](#typeconverter-class)
+-   [Sample Projects](#sample-projects)
 -   [Real-World Examples](#real-world-examples)
 -   [Error Handling](#error-handling)
 -   [Performance](#performance)
@@ -157,6 +158,10 @@ var personDto = mapper.Map<PersonDto>(person);
 // personDto.LastName == "Doe"
 // personDto.Age == 30
 ```
+
+**Want More Examples?**
+
+Check out the [Sample Projects](#sample-projects) section for 5 complete, runnable examples demonstrating everything from basic mapping to complex nested objects.
 
 ### Your First Mapping
 
@@ -1065,6 +1070,127 @@ public class MyConverter : TypeConverter
 
 ---
 
+## Sample Projects
+
+Knot includes **5 complete sample projects** demonstrating various features and usage patterns. Each sample is a standalone console application with full source code and documentation.
+
+### Available Samples
+
+All samples are located in the `samples/` directory and can be built together using `Knot.Samples.sln`.
+
+#### 1. BasicMapping
+
+**Purpose**: Introduction to Knot's core mapping functionality
+
+**Features**:
+
+-   Simple object-to-object mapping
+-   Automatic property matching by convention
+-   Basic mapper configuration
+-   Mapping to existing instances
+
+**Location**: `samples/BasicMapping/`
+
+```bash
+cd samples/BasicMapping
+dotnet run
+```
+
+#### 2. CustomPropertyMapping
+
+**Purpose**: Advanced property-level mapping configuration
+
+**Features**:
+
+-   `ForMember` custom property mapping
+-   Calculated and derived properties
+-   Property ignoring with `Ignore`
+-   Conditional property mapping
+
+**Location**: `samples/CustomPropertyMapping/`
+
+```bash
+cd samples/CustomPropertyMapping
+dotnet run
+```
+
+#### 3. CollectionMapping
+
+**Purpose**: Working with collections and arrays
+
+**Features**:
+
+-   List mapping with `MapToList`
+-   Array mapping with `MapToArray`
+-   IEnumerable mapping
+-   Extension method usage
+
+**Location**: `samples/CollectionMapping/`
+
+```bash
+cd samples/CollectionMapping
+dotnet run
+```
+
+#### 4. MappingProfiles
+
+**Purpose**: Organizing mappings using Profile classes
+
+**Features**:
+
+-   Creating and registering profiles
+-   Domain-driven organization
+-   Multiple profiles in one configuration
+-   Security-conscious mapping (hiding sensitive data)
+
+**Location**: `samples/MappingProfiles/`
+
+```bash
+cd samples/MappingProfiles
+dotnet run
+```
+
+#### 5. NestedObjects
+
+**Purpose**: Mapping complex object graphs with deep nesting
+
+**Features**:
+
+-   Deep object hierarchies
+-   Nested collections
+-   One-to-many relationships
+-   Enterprise domain model examples
+
+**Location**: `samples/NestedObjects/`
+
+```bash
+cd samples/NestedObjects
+dotnet run
+```
+
+### Building All Samples
+
+Build all sample projects at once:
+
+```bash
+cd samples
+dotnet build Knot.Samples.sln
+```
+
+### Learning Path
+
+Recommended order for learning Knot:
+
+1. **BasicMapping** - Understand fundamentals and automatic mapping
+2. **CustomPropertyMapping** - Learn property-level customization
+3. **CollectionMapping** - Master collection transformations
+4. **MappingProfiles** - Organize configurations for large applications
+5. **NestedObjects** - Handle complex real-world scenarios
+
+Each sample includes detailed comments and a dedicated README explaining concepts and best practices.
+
+---
+
 ## Real-World Examples
 
 ### Example 1: ASP.NET Core Web API
@@ -1560,48 +1686,7 @@ public class UserProfile : Profile
 }
 ```
 
-### 3. Testing Mappings
-
-**Unit Test Example:**
-
-```csharp
-public class UserProfileTests
-{
-    private readonly IMapper _mapper;
-
-    public UserProfileTests()
-    {
-    var config = new MapperConfiguration(cfg =>
-   {
- cfg.AddProfile<UserProfile>();
- });
-        _mapper = config.CreateMapper();
-    }
-
-    [Fact]
-    public void Should_Map_User_To_UserDto()
-    {
-        // Arrange
-        var user = new User
-        {
-    Id = 1,
-            FirstName = "John",
-            LastName = "Doe",
-            Email = "john@example.com"
-    };
-
-        // Act
-        var userDto = _mapper.Map<UserDto>(user);
-
-        // Assert
-        Assert.Equal(user.Id, userDto.Id);
-        Assert.Equal("John Doe", userDto.FullName);
-     Assert.Equal(user.Email, userDto.Email);
-    }
-}
-```
-
-### 4. Dependency Injection
+### 3. Dependency Injection
 
 **ASP.NET Core:**
 
@@ -1788,16 +1873,13 @@ dotnet restore
 
 # Build the solution
 dotnet build
-
-# Execute test suite
-dotnet test
 ```
 
 ### Contribution Guidelines
 
 1. Fork the repository to your GitHub account
 2. Create a feature branch (`git checkout -b feature/enhancement-name`)
-3. Implement changes with appropriate tests
+3. Implement changes with clear documentation
 4. Commit changes with descriptive messages (`git commit -m 'Add feature description'`)
 5. Push to your fork (`git push origin feature/enhancement-name`)
 6. Submit a pull request with detailed description
