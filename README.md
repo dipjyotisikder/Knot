@@ -8,86 +8,86 @@ A lightweight and efficient object-to-object mapping library for .NET Standard 2
 
 ---
 
-## 📖 Table of Contents
+## Table of Contents
 
-- [Overview](#-overview)
+- [Overview](#overview)
   - [What is Knot?](#what-is-knot)
   - [Why Choose Knot?](#why-choose-knot)
   - [Key Features](#key-features)
-- [Getting Started](#-getting-started)
+- [Getting Started](#getting-started)
   - [Installation](#installation)
   - [Quick Start](#quick-start)
   - [Your First Mapping](#your-first-mapping)
-- [Core Concepts](#-core-concepts)
+- [Core Concepts](#core-concepts)
   - [Mapper Configuration](#mapper-configuration)
   - [Creating Mappers](#creating-mappers)
   - [Mapping Operations](#mapping-operations)
-- [Feature Guide](#-feature-guide)
+- [Feature Guide](#feature-guide)
   - [Simple Mapping](#1-simple-mapping)
   - [Custom Property Mapping](#2-custom-property-mapping)
   - [Collection Mapping](#3-collection-mapping)
   - [Mapping Profiles](#4-mapping-profiles)
   - [Type Converters](#5-type-converters)
   - [Extension Methods](#6-extension-methods)
-- [Advanced Usage](#-advanced-usage)
+- [Advanced Usage](#advanced-usage)
   - [Nested Object Mapping](#nested-object-mapping)
   - [Conditional Mapping](#conditional-mapping)
   - [Bidirectional Mapping](#bidirectional-mapping)
   - [Assembly Scanning](#assembly-scanning)
-- [API Reference](#-api-reference)
+- [API Reference](#api-reference)
   - [MapperConfiguration](#mapperconfiguration)
   - [IMapper Interface](#imapper-interface)
   - [Profile Class](#profile-class)
   - [TypeConverter Class](#typeconverter-class)
-- [Real-World Examples](#-real-world-examples)
-- [Error Handling](#-error-handling)
-- [Performance](#-performance)
-- [Best Practices](#-best-practices)
-- [Troubleshooting](#-troubleshooting)
-- [FAQ](#-faq)
-- [Contributing](#-contributing)
-- [Support](#-support)
-- [Changelog](#-changelog)
-- [License](#-license)
+- [Real-World Examples](#real-world-examples)
+- [Error Handling](#error-handling)
+- [Performance](#performance)
+- [Best Practices](#best-practices)
+- [Troubleshooting](#troubleshooting)
+- [FAQ](#faq)
+- [Contributing](#contributing)
+- [Support](#support)
+- [Changelog](#changelog)
+- [License](#license)
 
 ---
 
-## 🎯 Overview
+## Overview
 
 ### What is Knot?
 
 Knot is a simple yet powerful mapping library that helps you transform objects from one type to another. It is perfect for scenarios where you need to convert between entities and DTOs, or any other object transformations in your application.
 
-**Think of Knot as a bridge** that connects two different object types and transfers data between them automatically, saving you from writing repetitive mapping code.
+Think of Knot as a bridge that connects two different object types and transfers data between them automatically, saving you from writing repetitive mapping code.
 
 ### Why Choose Knot?
 
 | Feature | Description |
 |---------|-------------|
-| 🚀 **Simple to Use** | Get started with just a few lines of code |
-| 🪶 **Lightweight** | Minimal overhead and zero external dependencies |
-| ⚡ **Fast** | Optimized for performance with expression compilation |
-| 🔧 **Flexible** | Supports custom mappings and converters |
-| 🛡️ **Type-Safe** | Compile-time type checking for your mappings |
-| 🌐 **.NET Standard 2.0** | Works with .NET Framework, .NET Core, and modern .NET |
+| **Simple to Use** | Get started with just a few lines of code |
+| **Lightweight** | Minimal overhead and zero external dependencies |
+| **Fast** | Optimized for performance with expression compilation |
+| **Flexible** | Supports custom mappings and converters |
+| **Type-Safe** | Compile-time type checking for your mappings |
+| **.NET Standard 2.0** | Works with .NET Framework, .NET Core, and modern .NET |
 
 ### Key Features
 
-- ✅ **Automatic property mapping** by convention (matching property names)
-- ✅ **Custom property mapping** with `ForMember` configuration
-- ✅ **Property ignoring** with `Ignore` method
-- ✅ **Collection mapping** (List, Array, IEnumerable)
-- ✅ **Nested object mapping** for complex object graphs
-- ✅ **Mapping profiles** for organized configuration
-- ✅ **Custom type converters** for special transformations
-- ✅ **Bidirectional mapping** support
-- ✅ **Assembly scanning** for automatic profile discovery
-- ✅ **Expression compilation** for optimal performance
-- ✅ **Fluent extension methods** for convenient usage
+- Automatic property mapping by convention (matching property names)
+- Custom property mapping with `ForMember` configuration
+- Property ignoring with `Ignore` method
+- Collection mapping (List, Array, IEnumerable)
+- Nested object mapping for complex object graphs
+- Mapping profiles for organized configuration
+- Custom type converters for special transformations
+- Bidirectional mapping support
+- Assembly scanning for automatic profile discovery
+- Expression compilation for optimal performance
+- Fluent extension methods for convenient usage
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Installation
 
@@ -204,7 +204,7 @@ var employee = new Employee
     Id = 101,
     FirstName = "Jane",
     LastName = "Smith",
-Email = "jane.smith@company.com",
+    Email = "jane.smith@company.com",
     Salary = 75000m,
     HireDate = DateTime.Now
 };
@@ -216,7 +216,7 @@ var employeeDto = mapper.Map<EmployeeDto>(employee);
 
 ---
 
-## 💡 Core Concepts
+## Core Concepts
 
 ### Mapper Configuration
 
@@ -400,7 +400,7 @@ Mapper.Map(updateDto, product);
 
 ---
 
-## 📚 Feature Guide
+## Feature Guide
 
 ### 1. Simple Mapping
 
@@ -426,7 +426,7 @@ public class BlogPostDto
 // Configuration
 var config = new MapperConfiguration(cfg =>
 {
-cfg.CreateMap<BlogPost, BlogPostDto>();
+    cfg.CreateMap<BlogPost, BlogPostDto>();
     // Id, Title, and AuthorName are automatically mapped
     // Content and PublishedDate are ignored (not in destination)
 });
@@ -801,7 +801,7 @@ var activeDtos = users
 
 ---
 
-## 🔥 Advanced Usage
+## Advanced Usage
 
 ### Nested Object Mapping
 
@@ -810,7 +810,7 @@ Knot automatically handles nested objects when mappings are configured:
 ```csharp
 public class Order
 {
-    public int Id { get; set; }
+  public int Id { get; set; }
     public DateTime OrderDate { get; set; }
     public Customer Customer { get; set; }
     public List<OrderItem> Items { get; set; }
@@ -962,7 +962,7 @@ var config = new MapperConfiguration(cfg =>
 
 ---
 
-## 📘 API Reference
+## API Reference
 
 ### MapperConfiguration
 
@@ -1060,7 +1060,7 @@ public class MyConverter : TypeConverter
 
 ---
 
-## 🌍 Real-World Examples
+## Real-World Examples
 
 ### Example 1: ASP.NET Core Web API
 
@@ -1203,7 +1203,7 @@ public class Order
     public string OrderNumber { get; set; }
     public DateTime OrderDate { get; set; }
     public int CustomerId { get; set; }
- public Customer Customer { get; set; }
+    public Customer Customer { get; set; }
     public List<OrderItem> Items { get; set; }
     public OrderStatus Status { get; set; }
     public decimal TotalAmount { get; set; }
@@ -1214,7 +1214,7 @@ public class OrderItem
   public int Id { get; set; }
     public int OrderId { get; set; }
     public int ProductId { get; set; }
-public Product Product { get; set; }
+    public Product Product { get; set; }
     public int Quantity { get; set; }
     public decimal UnitPrice { get; set; }
     public decimal LineTotal { get; set; }
@@ -1359,7 +1359,7 @@ throw new NotFoundException($"Product {id} not found");
 
 ---
 
-## ⚠️ Error Handling
+## Error Handling
 
 Knot provides specific exceptions for different error scenarios:
 
@@ -1423,7 +1423,7 @@ public ProductDto MapProduct(Product product)
     }
     catch (MappingException ex)
     {
-  _logger.LogWarning(ex, "Mapping failed, using manual mapping");
+        _logger.LogWarning(ex, "Mapping failed, using manual mapping");
         
   // Fallback to manual mapping
         return new ProductDto
@@ -1438,7 +1438,7 @@ public ProductDto MapProduct(Product product)
 
 ---
 
-## ⚡ Performance
+## Performance
 
 Knot is designed for **high performance** with minimal overhead.
 
@@ -1489,7 +1489,7 @@ dotnet run -c Release
 
 ---
 
-## 💎 Best Practices
+## Best Practices
 
 ### 1. Configuration Organization
 
@@ -1547,7 +1547,7 @@ public class UserProfile : Profile
         CreateMap<User, UserDto>();
         CreateMap<UserDto, User>();
         CreateMap<UserRole, UserRoleDto>();
-  }
+    }
 }
 ```
 
@@ -1565,7 +1565,7 @@ public class UserProfileTests
     var config = new MapperConfiguration(cfg =>
    {
  cfg.AddProfile<UserProfile>();
-        });
+ });
         _mapper = config.CreateMapper();
     }
     
@@ -1632,20 +1632,20 @@ public class ProductService
 
 ---
 
-## 🔧 Troubleshooting
+## Troubleshooting
 
-### Common Issues and Solutions
+### Common Issues and Resolutions
 
-#### Issue 1: Properties Not Mapping
+#### Issue 1: Property Name Mismatch
 
 **Problem:**
 ```csharp
-// Source has FirstName, Destination has first_name
+// Source property: FirstName, Destination property: first_name
 public class Source { public string FirstName { get; set; } }
 public class Dest { public string first_name { get; set; } }
 ```
 
-**Solution:**
+**Resolution:**
 ```csharp
 cfg.CreateMap<Source, Dest>(map =>
 {
@@ -1653,199 +1653,201 @@ cfg.CreateMap<Source, Dest>(map =>
 });
 ```
 
-#### Issue 2: Null Reference Exceptions
+#### Issue 2: Null Reference Handling
 
 **Problem:**
 ```csharp
-// Nested object is null
+// Nested object null causes exception
 var orderDto = mapper.Map<OrderDto>(order); // order.Customer is null
 ```
 
-**Solution:**
+**Resolution:**
 ```csharp
 cfg.CreateMap<Order, OrderDto>(map =>
 {
     map.ForMember(dest => dest.CustomerName, 
-        src => src.Customer?.Name ?? "Guest");
+     src => src.Customer?.Name ?? "Guest");
 });
 ```
 
-#### Issue 3: Collection Mapping Fails
+#### Issue 3: Incomplete Collection Mapping
 
 **Problem:**
 ```csharp
-// Missing collection item mapping
+// Missing item-level mapping configuration
 cfg.CreateMap<Order, OrderDto>();
-// OrderItem -> OrderItemDto mapping not configured
+// OrderItem to OrderItemDto mapping not configured
 ```
 
-**Solution:**
+**Resolution:**
 ```csharp
 cfg.CreateMap<Order, OrderDto>();
-cfg.CreateMap<OrderItem, OrderItemDto>(); // Add this
+cfg.CreateMap<OrderItem, OrderItemDto>(); // Required for collection items
 ```
 
-#### Issue 4: Type Conversion Error
+#### Issue 4: Type Conversion Failure
 
 **Problem:**
 ```csharp
-// String to int conversion fails
+// Incompatible type conversion
 public class Source { public string Age { get; set; } }
 public class Dest { public int Age { get; set; } }
 ```
 
-**Solution:**
+**Resolution Option 1 - Custom Converter:**
 ```csharp
-// Option 1: Custom converter
 cfg.AddConverter<StringToIntConverter>();
+```
 
-// Option 2: ForMember
+**Resolution Option 2 - ForMember Configuration:**
+```csharp
 cfg.CreateMap<Source, Dest>(map =>
 {
     map.ForMember(dest => dest.Age, 
-     src => int.TryParse(src.Age, out var age) ? age : 0);
+      src => int.TryParse(src.Age, out var age) ? age : 0);
 });
 ```
 
 ---
 
-## ❓ FAQ
+## FAQ
 
 ### General Questions
 
-**Q: Is Knot free to use?**  
-A: Yes, Knot is open-source and licensed under MIT License.
+**Q: What is the licensing model for Knot?**  
+A: Knot is open-source software distributed under the MIT License, permitting free commercial and non-commercial use.
 
-**Q: What .NET versions are supported?**  
-A: .NET Standard 2.0 and above (.NET Framework 4.6.1+, .NET Core 2.0+, .NET 5+).
+**Q: Which .NET versions are supported?**  
+A: Knot targets .NET Standard 2.0, providing compatibility with .NET Framework 4.6.1+, .NET Core 2.0+, and .NET 5+.
 
 **Q: Is Knot thread-safe?**  
-A: Yes, mapper instances are thread-safe and can be used concurrently.
+A: Yes, mapper instances are fully thread-safe and designed for concurrent usage.
 
-**Q: How is Knot different from AutoMapper?**  
-A: Knot is lightweight, has zero dependencies, and focuses on simplicity. AutoMapper has more features but more complexity.
+**Q: How does Knot compare to AutoMapper?**  
+A: Knot prioritizes simplicity and minimal dependencies, while AutoMapper offers a broader feature set with increased complexity.
 
 ### Technical Questions
 
-**Q: Can I map private properties?**  
-A: No, Knot only maps public properties.
+**Q: Does Knot support private property mapping?**  
+A: No, Knot exclusively maps public properties.
 
-**Q: Does Knot support recursive mapping?**  
-A: Yes, if you configure the mappings for all types in the graph.
+**Q: Can Knot handle recursive object structures?**  
+A: Yes, provided all types in the object graph have configured mappings.
 
-**Q: Can I map to interfaces?**  
-A: No, destination must be a concrete type.
+**Q: Is mapping to interface types supported?**  
+A: No, destination types must be concrete instantiable classes.
 
-**Q: How do I map nullable types?**  
-A: Knot handles nullable types automatically.
+**Q: How are nullable types handled?**  
+A: Knot automatically manages nullable type conversions.
 
-**Q: Can I use Knot with EF Core?**  
-A: Yes, Knot works great with Entity Framework Core.
+**Q: Is Knot compatible with Entity Framework Core?**  
+A: Yes, Knot integrates seamlessly with Entity Framework Core and other ORMs.
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
-Contributions are welcome! Here's how you can help:
+Contributions to Knot are welcome and encouraged. The following outlines how to contribute effectively:
 
-### Ways to Contribute
+### Contribution Methods
 
-- 🐛 **Report Bugs**: Open an issue with details
-- 💡 **Suggest Features**: Share your ideas
-- 📖 **Improve Docs**: Fix typos, add examples
-- 💻 **Submit PRs**: Fix bugs or add features
+- **Bug Reports**: Submit detailed issue reports with reproduction steps
+- **Feature Requests**: Propose enhancements with clear use cases
+- **Documentation**: Improve documentation clarity and completeness
+- **Code Contributions**: Submit pull requests for bug fixes or features
 
-### Development Setup
+### Development Environment Setup
 
 ```bash
 # Clone the repository
 git clone https://github.com/dipjyotisikder/Knot.git
 
-# Navigate to directory
+# Navigate to project directory
 cd Knot
 
-# Restore dependencies
+# Restore NuGet dependencies
 dotnet restore
 
-# Build the project
+# Build the solution
 dotnet build
 
-# Run tests
+# Execute test suite
 dotnet test
 ```
 
 ### Contribution Guidelines
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+1. Fork the repository to your GitHub account
+2. Create a feature branch (`git checkout -b feature/enhancement-name`)
+3. Implement changes with appropriate tests
+4. Commit changes with descriptive messages (`git commit -m 'Add feature description'`)
+5. Push to your fork (`git push origin feature/enhancement-name`)
+6. Submit a pull request with detailed description
 
-For major changes, please open an issue first to discuss what you would like to change.
-
----
-
-## 💬 Support
-
-### Getting Help
-
-If you encounter any issues or have questions:
-
-- 📖 **Documentation**: Read this README thoroughly
-- 🐛 **Issues**: [Open an issue](https://github.com/dipjyotisikder/Knot/issues)
-- 💬 **Discussions**: Check existing issues and discussions
-- 📧 **Email**: Contact the maintainer
-
-### Reporting Issues
-
-When reporting issues, please include:
-
-1. Knot version
-2. .NET version
-3. Minimal code sample to reproduce
-4. Expected behavior
-5. Actual behavior
-6. Stack trace (if applicable)
+For substantial changes, please open an issue first to discuss the proposed modifications.
 
 ---
 
-## 📝 Changelog
+## Support
+
+### Obtaining Assistance
+
+If you encounter issues or require clarification:
+
+- **Documentation**: Consult this comprehensive README
+- **Issue Tracker**: [Submit issues on GitHub](https://github.com/dipjyotisikder/Knot/issues)
+- **Discussions**: Review existing issues and community discussions
+- **Contact**: Reach out to the project maintainer
+
+### Issue Reporting Guidelines
+
+When submitting issue reports, include:
+
+1. Knot library version
+2. Target .NET version
+3. Minimal reproducible code sample
+4. Expected behavior description
+5. Actual observed behavior
+6. Complete exception stack trace (if applicable)
+
+---
+
+## Changelog
 
 ### Version 1.0.0
 
 **Initial Release** - January 2024
 
-#### Features
-- ✅ Core mapping engine with expression compilation
-- ✅ Convention-based property mapping
-- ✅ Custom property mapping with `ForMember`
-- ✅ Property ignoring with `Ignore`
-- ✅ Mapping profiles for organized configuration
-- ✅ Custom type converters
-- ✅ Extension methods for fluent mapping
-- ✅ Collection mapping support (List, Array, IEnumerable)
-- ✅ Nested object mapping
-- ✅ Instance and static mapper support
-- ✅ Assembly scanning for profiles
-- ✅ Comprehensive exception handling
-- ✅ Full XML documentation
+#### Core Features
+- Expression-based mapping engine with compiled execution
+- Convention-based automatic property mapping
+- Custom property mapping via `ForMember` configuration
+- Selective property exclusion via `Ignore` method
+- Organizational mapping profiles
+- Custom type converter infrastructure
+- Fluent extension methods for enhanced usability
+- Collection mapping (List, Array, IEnumerable)
+- Nested object graph mapping
+- Dual mapper patterns (instance-based and static)
+- Assembly scanning for automatic profile discovery
+- Comprehensive exception hierarchy
+- Complete XML documentation for IntelliSense
 
-#### Performance
-- ⚡ Expression compilation for fast mapping
-- ⚡ Reflection caching for optimal performance
-- ⚡ Minimal memory allocations
+#### Performance Enhancements
+- Expression compilation for optimized execution
+- Reflection metadata caching
+- Minimal memory allocation patterns
 
 #### Documentation
-- 📖 Complete README with examples
-- 📖 XML documentation for IntelliSense
-- 📖 Real-world usage examples
+- Comprehensive README with usage examples
+- Inline XML documentation
+- Real-world implementation scenarios
 
 ---
 
-## 📄 License
+## License
 
-This project is licensed under the **MIT License**.
+This project is licensed under the MIT License.
 
 ```
 MIT License
@@ -1871,24 +1873,24 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
 
-See the [LICENSE](LICENSE) file for full details.
+See the [LICENSE](LICENSE) file for complete details.
 
 ---
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
-- Thank you to all **contributors** who have helped make Knot better!
-- Inspired by the .NET mapping ecosystem
-- Built with ❤️ for the .NET community
+- Appreciation to all contributors who have enhanced Knot
+- Inspired by the .NET object mapping ecosystem
+- Built for the .NET developer community
 
 ---
 
-## 📚 Additional Resources
+## Additional Resources
 
 - **NuGet Package**: [https://www.nuget.org/packages/Knot](https://www.nuget.org/packages/Knot)
-- **Source Code**: [https://github.com/dipjyotisikder/Knot](https://github.com/dipjyotisikder/Knot)
+- **Source Repository**: [https://github.com/dipjyotisikder/Knot](https://github.com/dipjyotisikder/Knot)
 - **Issue Tracker**: [https://github.com/dipjyotisikder/Knot/issues](https://github.com/dipjyotisikder/Knot/issues)
-- **Releases**: [https://github.com/dipjyotisikder/Knot/releases](https://github.com/dipjyotisikder/Knot/releases)
+- **Release Notes**: [https://github.com/dipjyotisikder/Knot/releases](https://github.com/dipjyotisikder/Knot/releases)
 
 ---
 
@@ -1896,7 +1898,7 @@ See the [LICENSE](LICENSE) file for full details.
 
 **Made with care by [Dipjyoti Sikder](https://github.com/dipjyotisikder)**
 
-⭐ **Star this repository** if you find it helpful!
+If you find this library valuable, please consider starring the repository.
 
 [![GitHub stars](https://img.shields.io/github/stars/dipjyotisikder/Knot?style=social)](https://github.com/dipjyotisikder/Knot/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/dipjyotisikder/Knot?style=social)](https://github.com/dipjyotisikder/Knot/network/members)
