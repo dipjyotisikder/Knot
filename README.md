@@ -10,45 +10,45 @@ A lightweight and efficient object-to-object mapping library for .NET Standard 2
 
 ## Table of Contents
 
-- [Overview](#overview)
-  - [What is Knot?](#what-is-knot)
-  - [Why Choose Knot?](#why-choose-knot)
-  - [Key Features](#key-features)
-- [Getting Started](#getting-started)
-  - [Installation](#installation)
-  - [Quick Start](#quick-start)
-  - [Your First Mapping](#your-first-mapping)
-- [Core Concepts](#core-concepts)
-  - [Mapper Configuration](#mapper-configuration)
-  - [Creating Mappers](#creating-mappers)
-  - [Mapping Operations](#mapping-operations)
-- [Feature Guide](#feature-guide)
-  - [Simple Mapping](#1-simple-mapping)
-  - [Custom Property Mapping](#2-custom-property-mapping)
-  - [Collection Mapping](#3-collection-mapping)
-  - [Mapping Profiles](#4-mapping-profiles)
-  - [Type Converters](#5-type-converters)
-  - [Extension Methods](#6-extension-methods)
-- [Advanced Usage](#advanced-usage)
-  - [Nested Object Mapping](#nested-object-mapping)
-  - [Conditional Mapping](#conditional-mapping)
-  - [Bidirectional Mapping](#bidirectional-mapping)
-  - [Assembly Scanning](#assembly-scanning)
-- [API Reference](#api-reference)
-  - [MapperConfiguration](#mapperconfiguration)
-  - [IMapper Interface](#imapper-interface)
-  - [Profile Class](#profile-class)
-  - [TypeConverter Class](#typeconverter-class)
-- [Real-World Examples](#real-world-examples)
-- [Error Handling](#error-handling)
-- [Performance](#performance)
-- [Best Practices](#best-practices)
-- [Troubleshooting](#troubleshooting)
-- [FAQ](#faq)
-- [Contributing](#contributing)
-- [Support](#support)
-- [Changelog](#changelog)
-- [License](#license)
+-   [Overview](#overview)
+    -   [What is Knot?](#what-is-knot)
+    -   [Why Choose Knot?](#why-choose-knot)
+    -   [Key Features](#key-features)
+-   [Getting Started](#getting-started)
+    -   [Installation](#installation)
+    -   [Quick Start](#quick-start)
+    -   [Your First Mapping](#your-first-mapping)
+-   [Core Concepts](#core-concepts)
+    -   [Mapper Configuration](#mapper-configuration)
+    -   [Creating Mappers](#creating-mappers)
+    -   [Mapping Operations](#mapping-operations)
+-   [Feature Guide](#feature-guide)
+    -   [Simple Mapping](#1-simple-mapping)
+    -   [Custom Property Mapping](#2-custom-property-mapping)
+    -   [Collection Mapping](#3-collection-mapping)
+    -   [Mapping Profiles](#4-mapping-profiles)
+    -   [Type Converters](#5-type-converters)
+    -   [Extension Methods](#6-extension-methods)
+-   [Advanced Usage](#advanced-usage)
+    -   [Nested Object Mapping](#nested-object-mapping)
+    -   [Conditional Mapping](#conditional-mapping)
+    -   [Bidirectional Mapping](#bidirectional-mapping)
+    -   [Assembly Scanning](#assembly-scanning)
+-   [API Reference](#api-reference)
+    -   [MapperConfiguration](#mapperconfiguration)
+    -   [IMapper Interface](#imapper-interface)
+    -   [Profile Class](#profile-class)
+    -   [TypeConverter Class](#typeconverter-class)
+-   [Real-World Examples](#real-world-examples)
+-   [Error Handling](#error-handling)
+-   [Performance](#performance)
+-   [Best Practices](#best-practices)
+-   [Troubleshooting](#troubleshooting)
+-   [FAQ](#faq)
+-   [Contributing](#contributing)
+-   [Support](#support)
+-   [Changelog](#changelog)
+-   [License](#license)
 
 ---
 
@@ -62,28 +62,28 @@ Think of Knot as a bridge that connects two different object types and transfers
 
 ### Why Choose Knot?
 
-| Feature | Description |
-|---------|-------------|
-| **Simple to Use** | Get started with just a few lines of code |
-| **Lightweight** | Minimal overhead and zero external dependencies |
-| **Fast** | Optimized for performance with expression compilation |
-| **Flexible** | Supports custom mappings and converters |
-| **Type-Safe** | Compile-time type checking for your mappings |
+| Feature               | Description                                           |
+| --------------------- | ----------------------------------------------------- |
+| **Simple to Use**     | Get started with just a few lines of code             |
+| **Lightweight**       | Minimal overhead and zero external dependencies       |
+| **Fast**              | Optimized for performance with expression compilation |
+| **Flexible**          | Supports custom mappings and converters               |
+| **Type-Safe**         | Compile-time type checking for your mappings          |
 | **.NET Standard 2.0** | Works with .NET Framework, .NET Core, and modern .NET |
 
 ### Key Features
 
-- Automatic property mapping by convention (matching property names)
-- Custom property mapping with `ForMember` configuration
-- Property ignoring with `Ignore` method
-- Collection mapping (List, Array, IEnumerable)
-- Nested object mapping for complex object graphs
-- Mapping profiles for organized configuration
-- Custom type converters for special transformations
-- Bidirectional mapping support
-- Assembly scanning for automatic profile discovery
-- Expression compilation for optimal performance
-- Fluent extension methods for convenient usage
+-   Automatic property mapping by convention (matching property names)
+-   Custom property mapping with `ForMember` configuration
+-   Property ignoring with `Ignore` method
+-   Collection mapping (List, Array, IEnumerable)
+-   Nested object mapping for complex object graphs
+-   Mapping profiles for organized configuration
+-   Custom type converters for special transformations
+-   Bidirectional mapping support
+-   Assembly scanning for automatic profile discovery
+-   Expression compilation for optimal performance
+-   Fluent extension methods for convenient usage
 
 ---
 
@@ -94,16 +94,19 @@ Think of Knot as a bridge that connects two different object types and transfers
 Install Knot via NuGet Package Manager:
 
 **Using .NET CLI:**
+
 ```bash
 dotnet add package Knot
 ```
 
 **Using Package Manager Console:**
+
 ```powershell
 Install-Package Knot
 ```
 
 **Using Visual Studio:**
+
 1. Right-click on your project
 2. Select "Manage NuGet Packages"
 3. Search for "Knot"
@@ -229,7 +232,7 @@ var config = new MapperConfiguration(cfg =>
 {
     // Simple mapping - properties with matching names are mapped automatically
     cfg.CreateMap<Source, Destination>();
-    
+
     // Multiple mappings
     cfg.CreateMap<User, UserDto>();
     cfg.CreateMap<Order, OrderDto>();
@@ -245,9 +248,9 @@ var config = new MapperConfiguration(cfg =>
     cfg.CreateMap<Person, PersonDto>(map =>
     {
  // Custom property mapping
- map.ForMember(dest => dest.FullName, 
+ map.ForMember(dest => dest.FullName,
      src => $"{src.FirstName} {src.LastName}");
-   
+
         // Ignore a property
         map.Ignore(dest => dest.InternalId);
     });
@@ -277,10 +280,11 @@ var result = mapper.Map<Destination>(source);
 ```
 
 **Benefits:**
-- Testable (can inject mock mappers)
-- Thread-safe
-- Multiple configurations possible
-- Perfect for ASP.NET Core DI
+
+-   Testable (can inject mock mappers)
+-   Thread-safe
+-   Multiple configurations possible
+-   Perfect for ASP.NET Core DI
 
 **ASP.NET Core Example:**
 
@@ -292,7 +296,7 @@ public void ConfigureServices(IServiceCollection services)
     {
         cfg.AddProfiles(typeof(Startup).Assembly);
     });
-    
+
     services.AddSingleton(config.CreateMapper());
 }
 
@@ -300,12 +304,12 @@ public void ConfigureServices(IServiceCollection services)
 public class UsersController : ControllerBase
 {
     private readonly IMapper _mapper;
-    
+
     public UsersController(IMapper mapper)
     {
         _mapper = mapper;
     }
-    
+
     public IActionResult GetUser(int id)
  {
         var user = _userService.GetById(id);
@@ -331,9 +335,10 @@ var result = Mapper.Map<Destination>(source);
 ```
 
 **Benefits:**
-- Convenient for quick prototypes
-- No need to pass mapper instances
-- Simple console applications
+
+-   Convenient for quick prototypes
+-   No need to pass mapper instances
+-   Simple console applications
 
 **Warning:** Static mapper is shared globally. Not recommended for applications with different mapping configurations.
 
@@ -472,15 +477,15 @@ var config = new MapperConfiguration(cfg =>
     cfg.CreateMap<Customer, CustomerDto>(map =>
   {
         // Combine properties
-        map.ForMember(dest => dest.FullName, 
+        map.ForMember(dest => dest.FullName,
       src => $"{src.FirstName} {src.LastName}");
-        
+
         // Calculate age
-        map.ForMember(dest => dest.Age, 
+        map.ForMember(dest => dest.Age,
             src => DateTime.Now.Year - src.DateOfBirth.Year);
-        
+
   // Map from different property name
-  map.ForMember(dest => dest.ContactEmail, 
+  map.ForMember(dest => dest.ContactEmail,
             src => src.Email);
     });
 });
@@ -582,18 +587,18 @@ public class UserMappingProfile : Profile
         // User to DTO
       CreateMap<User, UserDto>(map =>
         {
-  map.ForMember(dest => dest.FullName, 
+  map.ForMember(dest => dest.FullName,
      src => $"{src.FirstName} {src.LastName}");
         map.Ignore(dest => dest.TempData);
         });
-      
+
   // DTO to User (reverse mapping)
         CreateMap<UserDto, User>(map =>
         {
             map.Ignore(dest => dest.CreatedDate);
       map.Ignore(dest => dest.ModifiedDate);
         });
-     
+
         // UserRole mappings
         CreateMap<UserRole, UserRoleDto>();
       CreateMap<UserRoleDto, UserRole>();
@@ -654,7 +659,7 @@ public void ConfigureServices(IServiceCollection services)
     {
       cfg.AddProfiles(typeof(Startup).Assembly);
     });
-    
+
     services.AddSingleton(config.CreateMapper());
 }
 ```
@@ -904,10 +909,10 @@ public class EmployeeMappingProfile : Profile
         // Forward: Entity → DTO
  CreateMap<Employee, EmployeeDto>(map =>
         {
-      map.ForMember(dest => dest.FullName, 
+      map.ForMember(dest => dest.FullName,
      src => $"{src.FirstName} {src.LastName}");
         });
-    
+
         // Reverse: DTO → Entity
         CreateMap<EmployeeDto, Employee>(map =>
   {
@@ -916,13 +921,13 @@ public class EmployeeMappingProfile : Profile
                 var parts = src.FullName?.Split(' ');
  return parts?[0] ?? string.Empty;
             });
-            
+
       map.ForMember(dest => dest.LastName, src =>
      {
       var parts = src.FullName?.Split(' ');
         return parts?.Length > 1 ? parts[1] : string.Empty;
   });
-    
+
             // Ignore fields that shouldn't be updated
  map.Ignore(dest => dest.HireDate);
             map.Ignore(dest => dest.Salary);
@@ -976,14 +981,14 @@ public MapperConfiguration(Action<IMapperConfigurationExpression> configure)
 
 #### Methods
 
-| Method | Description | Example |
-|--------|-------------|---------|
-| `CreateMapper()` | Creates an IMapper instance | `var mapper = config.CreateMapper();` |
-| `CreateMap<TSource, TDestination>()` | Defines a mapping between two types | `cfg.CreateMap<User, UserDto>();` |
+| Method                                                                      | Description                                 | Example                                         |
+| --------------------------------------------------------------------------- | ------------------------------------------- | ----------------------------------------------- |
+| `CreateMapper()`                                                            | Creates an IMapper instance                 | `var mapper = config.CreateMapper();`           |
+| `CreateMap<TSource, TDestination>()`                                        | Defines a mapping between two types         | `cfg.CreateMap<User, UserDto>();`               |
 | `CreateMap<TSource, TDestination>(Action<ITypeMap<TSource, TDestination>>)` | Defines a mapping with custom configuration | `cfg.CreateMap<User, UserDto>(map => { ... });` |
-| `AddProfile<TProfile>()` | Registers a mapping profile | `cfg.AddProfile<UserProfile>();` |
-| `AddProfiles(params Assembly[])` | Scans assemblies for profiles | `cfg.AddProfiles(assembly);` |
-| `AddConverter<TConverter>()` | Registers a type converter | `cfg.AddConverter<StringToIntConverter>();` |
+| `AddProfile<TProfile>()`                                                    | Registers a mapping profile                 | `cfg.AddProfile<UserProfile>();`                |
+| `AddProfiles(params Assembly[])`                                            | Scans assemblies for profiles               | `cfg.AddProfiles(assembly);`                    |
+| `AddConverter<TConverter>()`                                                | Registers a type converter                  | `cfg.AddConverter<StringToIntConverter>();`     |
 
 ### IMapper Interface
 
@@ -991,11 +996,11 @@ The interface for performing mapping operations.
 
 #### Methods
 
-| Method | Description | Example |
-|--------|-------------|---------|
-| `TDestination Map<TDestination>(object source)` | Maps source to new destination | `var dto = mapper.Map<UserDto>(user);` |
-| `TDestination Map<TSource, TDestination>(TSource source)` | Maps with explicit types | `var dto = mapper.Map<User, UserDto>(user);` |
-| `void Map<TSource, TDestination>(TSource source, TDestination destination)` | Maps to existing instance | `mapper.Map(user, existingDto);` |
+| Method                                                                      | Description                    | Example                                      |
+| --------------------------------------------------------------------------- | ------------------------------ | -------------------------------------------- |
+| `TDestination Map<TDestination>(object source)`                             | Maps source to new destination | `var dto = mapper.Map<UserDto>(user);`       |
+| `TDestination Map<TSource, TDestination>(TSource source)`                   | Maps with explicit types       | `var dto = mapper.Map<User, UserDto>(user);` |
+| `void Map<TSource, TDestination>(TSource source, TDestination destination)` | Maps to existing instance      | `mapper.Map(user, existingDto);`             |
 
 ### Profile Class
 
@@ -1007,9 +1012,9 @@ Base class for organizing mapping configurations.
 public abstract class Profile
 {
     protected internal abstract void Configure();
-    
+
     protected void CreateMap<TSource, TDestination>();
-    
+
     protected void CreateMap<TSource, TDestination>(
         Action<ITypeMap<TSource, TDestination>> configureMap);
 }
@@ -1050,7 +1055,7 @@ public class MyConverter : TypeConverter
     {
      return sourceType == typeof(string) && destinationType == typeof(int);
     }
- 
+
     public override object Convert(object source, Type destinationType)
     {
         return int.Parse(source.ToString());
@@ -1110,10 +1115,10 @@ public class ProductProfile : Profile
     {
         CreateMap<Product, ProductDto>(map =>
         {
-    map.ForMember(dest => dest.CategoryName, 
+    map.ForMember(dest => dest.CategoryName,
                 src => src.Category?.Name ?? "Uncategorized");
         });
- 
+
         CreateMap<CreateProductDto, Product>(map =>
         {
             map.Ignore(dest => dest.Id);
@@ -1152,13 +1157,13 @@ public class ProductsController : ControllerBase
 {
     private readonly IProductService _productService;
     private readonly IMapper _mapper;
-    
+
     public ProductsController(IProductService productService, IMapper mapper)
     {
         _productService = productService;
       _mapper = mapper;
     }
-    
+
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
@@ -1166,27 +1171,27 @@ public class ProductsController : ControllerBase
      var productDtos = products.MapToList<Product, ProductDto>(_mapper);
         return Ok(productDtos);
     }
-    
+
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
     {
         var product = await _productService.GetByIdAsync(id);
         if (product == null)
             return NotFound();
-    
+
         var productDto = _mapper.Map<ProductDto>(product);
         return Ok(productDto);
     }
-    
+
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateProductDto createDto)
     {
         var product = _mapper.Map<Product>(createDto);
         product.CreatedDate = DateTime.UtcNow;
-        
+
     var created = await _productService.CreateAsync(product);
         var productDto = _mapper.Map<ProductDto>(created);
-        
+
       return CreatedAtAction(nameof(GetById), new { id = productDto.Id }, productDto);
     }
 }
@@ -1280,23 +1285,23 @@ public class OrderProfile : Profile
     {
         CreateMap<Order, OrderDto>(map =>
       {
-   map.ForMember(dest => dest.OrderDateFormatted, 
+   map.ForMember(dest => dest.OrderDateFormatted,
  src => src.OrderDate.ToString("MMM dd, yyyy"));
-   map.ForMember(dest => dest.Status, 
+   map.ForMember(dest => dest.Status,
        src => src.Status.ToString());
-            map.ForMember(dest => dest.TotalItems, 
+            map.ForMember(dest => dest.TotalItems,
                 src => src.Items?.Sum(i => i.Quantity) ?? 0);
    });
-        
+
         CreateMap<OrderItem, OrderItemDto>(map =>
    {
-            map.ForMember(dest => dest.ProductName, 
+            map.ForMember(dest => dest.ProductName,
           src => src.Product?.Name ?? "Unknown");
  });
-   
+
         CreateMap<Customer, CustomerSummaryDto>(map =>
         {
- map.ForMember(dest => dest.FullName, 
+ map.ForMember(dest => dest.FullName,
      src => $"{src.FirstName} {src.LastName}");
    });
     }
@@ -1319,38 +1324,38 @@ public class ProductService : IProductService
 {
     private readonly IGenericRepository<Product> _repository;
     private readonly IMapper _mapper;
-    
+
     public ProductService(IGenericRepository<Product> repository, IMapper mapper)
     {
         _repository = repository;
         _mapper = mapper;
     }
-    
+
     public async Task<IEnumerable<ProductDto>> GetAllProductsAsync()
     {
       var products = await _repository.GetAllAsync();
       return products.MapToList<Product, ProductDto>(_mapper);
     }
-    
+
     public async Task<ProductDto> GetProductByIdAsync(int id)
     {
         var product = await _repository.GetByIdAsync(id);
         return product?.MapTo<ProductDto>(_mapper);
     }
-    
+
     public async Task<ProductDto> CreateProductAsync(CreateProductDto createDto)
     {
    var product = _mapper.Map<Product>(createDto);
         var created = await _repository.AddAsync(product);
     return _mapper.Map<ProductDto>(created);
     }
-    
+
  public async Task UpdateProductAsync(int id, UpdateProductDto updateDto)
     {
         var product = await _repository.GetByIdAsync(id);
       if (product == null)
 throw new NotFoundException($"Product {id} not found");
-  
+
      _mapper.Map(updateDto, product);
   await _repository.UpdateAsync(product);
     }
@@ -1365,11 +1370,11 @@ Knot provides specific exceptions for different error scenarios:
 
 ### Exception Types
 
-| Exception | When It's Thrown | How to Handle |
-|-----------|------------------|---------------|
-| `MappingException` | General mapping errors | Catch and log, check configuration |
-| `TypeConversionException` | Type conversion fails | Add custom converter |
-| `MissingPropertyException` | Property not found | Use `Ignore()` or fix mapping |
+| Exception                  | When It's Thrown       | How to Handle                      |
+| -------------------------- | ---------------------- | ---------------------------------- |
+| `MappingException`         | General mapping errors | Catch and log, check configuration |
+| `TypeConversionException`  | Type conversion fails  | Add custom converter               |
+| `MissingPropertyException` | Property not found     | Use `Ignore()` or fix mapping      |
 
 ### Exception Handling Examples
 
@@ -1382,7 +1387,7 @@ try
 }
 catch (MappingException ex)
 {
-    _logger.LogError(ex, "Mapping failed for {SourceType} to {DestinationType}", 
+    _logger.LogError(ex, "Mapping failed for {SourceType} to {DestinationType}",
         source.GetType(), typeof(Destination));
     throw;
 }
@@ -1424,7 +1429,7 @@ public ProductDto MapProduct(Product product)
     catch (MappingException ex)
     {
         _logger.LogWarning(ex, "Mapping failed, using manual mapping");
-        
+
   // Fallback to manual mapping
         return new ProductDto
         {
@@ -1444,12 +1449,12 @@ Knot is designed for **high performance** with minimal overhead.
 
 ### Performance Optimizations
 
-| Feature | Benefit |
-|---------|---------|
+| Feature                    | Benefit                                  |
+| -------------------------- | ---------------------------------------- |
 | **Expression Compilation** | Fast property access (near-native speed) |
-| **Reflection Caching** | Metadata cached, no repeated lookups |
-| **Minimal Allocations** | Optimized memory usage |
-| **Lazy Initialization** | Resources created only when needed |
+| **Reflection Caching**     | Metadata cached, no repeated lookups     |
+| **Minimal Allocations**    | Optimized memory usage                   |
+| **Lazy Initialization**    | Resources created only when needed       |
 
 ### Performance Characteristics
 
@@ -1493,7 +1498,8 @@ dotnet run -c Release
 
 ### 1. Configuration Organization
 
-**❌ Don't:**
+**Incorrect Approach:**
+
 ```csharp
 // Scattered configuration in controllers
 public class UsersController
@@ -1510,7 +1516,8 @@ public class UsersController
 }
 ```
 
-**✅ Do:**
+**Correct Approach:**
+
 ```csharp
 // Centralized configuration at startup
 public class Startup
@@ -1529,6 +1536,7 @@ public class Startup
 ### 2. Profile Organization
 
 **Structure:**
+
 ```
 YourProject/
 ├── Mappings/
@@ -1539,6 +1547,7 @@ YourProject/
 ```
 
 **Example:**
+
 ```csharp
 public class UserProfile : Profile
 {
@@ -1559,7 +1568,7 @@ public class UserProfile : Profile
 public class UserProfileTests
 {
     private readonly IMapper _mapper;
-    
+
     public UserProfileTests()
     {
     var config = new MapperConfiguration(cfg =>
@@ -1568,7 +1577,7 @@ public class UserProfileTests
  });
         _mapper = config.CreateMapper();
     }
-    
+
     [Fact]
     public void Should_Map_User_To_UserDto()
     {
@@ -1580,10 +1589,10 @@ public class UserProfileTests
             LastName = "Doe",
             Email = "john@example.com"
     };
-        
+
         // Act
         var userDto = _mapper.Map<UserDto>(user);
-  
+
         // Assert
         Assert.Equal(user.Id, userDto.Id);
         Assert.Equal("John Doe", userDto.FullName);
@@ -1614,7 +1623,7 @@ builder.Services.AddSingleton(mapperConfig.CreateMapper());
 public class ProductService
 {
     private readonly IMapper _mapper;
-    
+
     public ProductService(IMapper mapper)
     {
         _mapper = mapper;
@@ -1624,11 +1633,11 @@ public class ProductService
 
 ### 5. Naming Conventions
 
-- **Entities**: `User`, `Product`, `Order`
-- **DTOs**: `UserDto`, `ProductDto`, `OrderDto`
-- **Create DTOs**: `CreateUserDto`, `CreateProductDto`
-- **Update DTOs**: `UpdateUserDto`, `UpdateProductDto`
-- **Profiles**: `UserProfile`, `ProductProfile`
+-   **Entities**: `User`, `Product`, `Order`
+-   **DTOs**: `UserDto`, `ProductDto`, `OrderDto`
+-   **Create DTOs**: `CreateUserDto`, `CreateProductDto`
+-   **Update DTOs**: `UpdateUserDto`, `UpdateProductDto`
+-   **Profiles**: `UserProfile`, `ProductProfile`
 
 ---
 
@@ -1639,6 +1648,7 @@ public class ProductService
 #### Issue 1: Property Name Mismatch
 
 **Problem:**
+
 ```csharp
 // Source property: FirstName, Destination property: first_name
 public class Source { public string FirstName { get; set; } }
@@ -1646,6 +1656,7 @@ public class Dest { public string first_name { get; set; } }
 ```
 
 **Resolution:**
+
 ```csharp
 cfg.CreateMap<Source, Dest>(map =>
 {
@@ -1656,16 +1667,18 @@ cfg.CreateMap<Source, Dest>(map =>
 #### Issue 2: Null Reference Handling
 
 **Problem:**
+
 ```csharp
 // Nested object null causes exception
 var orderDto = mapper.Map<OrderDto>(order); // order.Customer is null
 ```
 
 **Resolution:**
+
 ```csharp
 cfg.CreateMap<Order, OrderDto>(map =>
 {
-    map.ForMember(dest => dest.CustomerName, 
+    map.ForMember(dest => dest.CustomerName,
      src => src.Customer?.Name ?? "Guest");
 });
 ```
@@ -1673,6 +1686,7 @@ cfg.CreateMap<Order, OrderDto>(map =>
 #### Issue 3: Incomplete Collection Mapping
 
 **Problem:**
+
 ```csharp
 // Missing item-level mapping configuration
 cfg.CreateMap<Order, OrderDto>();
@@ -1680,6 +1694,7 @@ cfg.CreateMap<Order, OrderDto>();
 ```
 
 **Resolution:**
+
 ```csharp
 cfg.CreateMap<Order, OrderDto>();
 cfg.CreateMap<OrderItem, OrderItemDto>(); // Required for collection items
@@ -1688,6 +1703,7 @@ cfg.CreateMap<OrderItem, OrderItemDto>(); // Required for collection items
 #### Issue 4: Type Conversion Failure
 
 **Problem:**
+
 ```csharp
 // Incompatible type conversion
 public class Source { public string Age { get; set; } }
@@ -1695,15 +1711,17 @@ public class Dest { public int Age { get; set; } }
 ```
 
 **Resolution Option 1 - Custom Converter:**
+
 ```csharp
 cfg.AddConverter<StringToIntConverter>();
 ```
 
 **Resolution Option 2 - ForMember Configuration:**
+
 ```csharp
 cfg.CreateMap<Source, Dest>(map =>
 {
-    map.ForMember(dest => dest.Age, 
+    map.ForMember(dest => dest.Age,
       src => int.TryParse(src.Age, out var age) ? age : 0);
 });
 ```
@@ -1751,10 +1769,10 @@ Contributions to Knot are welcome and encouraged. The following outlines how to 
 
 ### Contribution Methods
 
-- **Bug Reports**: Submit detailed issue reports with reproduction steps
-- **Feature Requests**: Propose enhancements with clear use cases
-- **Documentation**: Improve documentation clarity and completeness
-- **Code Contributions**: Submit pull requests for bug fixes or features
+-   **Bug Reports**: Submit detailed issue reports with reproduction steps
+-   **Feature Requests**: Propose enhancements with clear use cases
+-   **Documentation**: Improve documentation clarity and completeness
+-   **Code Contributions**: Submit pull requests for bug fixes or features
 
 ### Development Environment Setup
 
@@ -1794,10 +1812,9 @@ For substantial changes, please open an issue first to discuss the proposed modi
 
 If you encounter issues or require clarification:
 
-- **Documentation**: Consult this comprehensive README
-- **Issue Tracker**: [Submit issues on GitHub](https://github.com/dipjyotisikder/Knot/issues)
-- **Discussions**: Review existing issues and community discussions
-- **Contact**: Reach out to the project maintainer
+-   **Documentation**: Consult this comprehensive README
+-   **Issue Tracker**: [Submit issues on GitHub](https://github.com/dipjyotisikder/Knot/issues)
+-   **Contact**: Reach out to the project maintainer
 
 ### Issue Reporting Guidelines
 
@@ -1816,32 +1833,35 @@ When submitting issue reports, include:
 
 ### Version 1.0.0
 
-**Initial Release** - January 2024
+**Initial Release** - November 2025
 
 #### Core Features
-- Expression-based mapping engine with compiled execution
-- Convention-based automatic property mapping
-- Custom property mapping via `ForMember` configuration
-- Selective property exclusion via `Ignore` method
-- Organizational mapping profiles
-- Custom type converter infrastructure
-- Fluent extension methods for enhanced usability
-- Collection mapping (List, Array, IEnumerable)
-- Nested object graph mapping
-- Dual mapper patterns (instance-based and static)
-- Assembly scanning for automatic profile discovery
-- Comprehensive exception hierarchy
-- Complete XML documentation for IntelliSense
+
+-   Expression-based mapping engine with compiled execution
+-   Convention-based automatic property mapping
+-   Custom property mapping via `ForMember` configuration
+-   Selective property exclusion via `Ignore` method
+-   Organizational mapping profiles
+-   Custom type converter infrastructure
+-   Fluent extension methods for enhanced usability
+-   Collection mapping (List, Array, IEnumerable)
+-   Nested object graph mapping
+-   Dual mapper patterns (instance-based and static)
+-   Assembly scanning for automatic profile discovery
+-   Comprehensive exception hierarchy
+-   Complete XML documentation for IntelliSense
 
 #### Performance Enhancements
-- Expression compilation for optimized execution
-- Reflection metadata caching
-- Minimal memory allocation patterns
+
+-   Expression compilation for optimized execution
+-   Reflection metadata caching
+-   Minimal memory allocation patterns
 
 #### Documentation
-- Comprehensive README with usage examples
-- Inline XML documentation
-- Real-world implementation scenarios
+
+-   Comprehensive README with usage examples
+-   Inline XML documentation
+-   Real-world implementation scenarios
 
 ---
 
@@ -1852,7 +1872,7 @@ This project is licensed under the MIT License.
 ```
 MIT License
 
-Copyright (c) 2024 Dipjyoti Sikder
+Copyright (c) 2025 Dipjyoti Sikder
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -1879,18 +1899,18 @@ See the [LICENSE](LICENSE) file for complete details.
 
 ## Acknowledgments
 
-- Appreciation to all contributors who have enhanced Knot
-- Inspired by the .NET object mapping ecosystem
-- Built for the .NET developer community
+-   Appreciation to all contributors who have enhanced Knot
+-   Inspired by the .NET object mapping ecosystem
+-   Built for the .NET developer community
 
 ---
 
 ## Additional Resources
 
-- **NuGet Package**: [https://www.nuget.org/packages/Knot](https://www.nuget.org/packages/Knot)
-- **Source Repository**: [https://github.com/dipjyotisikder/Knot](https://github.com/dipjyotisikder/Knot)
-- **Issue Tracker**: [https://github.com/dipjyotisikder/Knot/issues](https://github.com/dipjyotisikder/Knot/issues)
-- **Release Notes**: [https://github.com/dipjyotisikder/Knot/releases](https://github.com/dipjyotisikder/Knot/releases)
+-   **NuGet Package**: [https://www.nuget.org/packages/Knot](https://www.nuget.org/packages/Knot)
+-   **Source Repository**: [https://github.com/dipjyotisikder/Knot](https://github.com/dipjyotisikder/Knot)
+-   **Issue Tracker**: [https://github.com/dipjyotisikder/Knot/issues](https://github.com/dipjyotisikder/Knot/issues)
+-   **Release Notes**: [https://github.com/dipjyotisikder/Knot/releases](https://github.com/dipjyotisikder/Knot/releases)
 
 ---
 
