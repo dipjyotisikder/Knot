@@ -55,7 +55,7 @@ namespace Knot.Utilities
         /// </summary>
         /// <param name="expression">The expression.</param>
         /// <returns>The member expression if found; otherwise, null.</returns>
-        private static MemberExpression GetMemberExpression(Expression expression)
+        private static MemberExpression? GetMemberExpression(Expression expression)
         {
             if (expression is MemberExpression memberExpression)
             {

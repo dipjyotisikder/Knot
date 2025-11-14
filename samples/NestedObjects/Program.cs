@@ -148,6 +148,8 @@ public class Program
     }
 }
 
+
+
 // Domain Models
 public class Company
 {
@@ -159,44 +161,6 @@ public class Company
     public List<Project> ActiveProjects { get; set; } = new();
 }
 
-public class Department
-{
-    public int Id { get; set; }
-    public string Name { get; set; } = string.Empty;
-    public decimal Budget { get; set; }
-    public Employee Manager { get; set; } = null!;
-    public List<Employee> Employees { get; set; } = new();
-}
-
-public class Employee
-{
-    public int Id { get; set; }
-    public string FirstName { get; set; } = string.Empty;
-    public string LastName { get; set; } = string.Empty;
-    public string Title { get; set; } = string.Empty;
-    public decimal Salary { get; set; }
-    public DateTime HireDate { get; set; }
-}
-
-public class Address
-{
-    public string Street { get; set; } = string.Empty;
-    public string City { get; set; } = string.Empty;
-    public string State { get; set; } = string.Empty;
-    public string ZipCode { get; set; } = string.Empty;
-    public string Country { get; set; } = string.Empty;
-}
-
-public class Project
-{
-    public int Id { get; set; }
-    public string Name { get; set; } = string.Empty;
-    public DateTime StartDate { get; set; }
-    public decimal Budget { get; set; }
-    public string Status { get; set; } = string.Empty;
-}
-
-// DTOs
 public class CompanyDto
 {
     public int Id { get; set; }
@@ -205,6 +169,18 @@ public class CompanyDto
     public AddressDto Headquarters { get; set; } = null!;
     public List<DepartmentDto> Departments { get; set; } = new();
     public List<ProjectDto> ActiveProjects { get; set; } = new();
+}
+
+
+
+
+public class Department
+{
+    public int Id { get; set; }
+    public string Name { get; set; } = string.Empty;
+    public decimal Budget { get; set; }
+    public Employee Manager { get; set; } = null!;
+    public List<Employee> Employees { get; set; } = new();
 }
 
 public class DepartmentDto
@@ -216,12 +192,35 @@ public class DepartmentDto
     public List<EmployeeDto> Employees { get; set; } = new();
 }
 
+
+
+public class Employee
+{
+    public int Id { get; set; }
+    public string FirstName { get; set; } = string.Empty;
+    public string LastName { get; set; } = string.Empty;
+    public string Title { get; set; } = string.Empty;
+    public decimal Salary { get; set; }
+    public DateTime HireDate { get; set; }
+}
+
 public class EmployeeDto
 {
     public int Id { get; set; }
     public string FirstName { get; set; } = string.Empty;
     public string LastName { get; set; } = string.Empty;
     public string Title { get; set; } = string.Empty;
+}
+
+
+
+public class Address
+{
+    public string Street { get; set; } = string.Empty;
+    public string City { get; set; } = string.Empty;
+    public string State { get; set; } = string.Empty;
+    public string ZipCode { get; set; } = string.Empty;
+    public string Country { get; set; } = string.Empty;
 }
 
 public class AddressDto
@@ -231,6 +230,17 @@ public class AddressDto
     public string State { get; set; } = string.Empty;
     public string ZipCode { get; set; } = string.Empty;
     public string Country { get; set; } = string.Empty;
+}
+
+
+
+public class Project
+{
+    public int Id { get; set; }
+    public string Name { get; set; } = string.Empty;
+    public DateTime StartDate { get; set; }
+    public decimal Budget { get; set; }
+    public string Status { get; set; } = string.Empty;
 }
 
 public class ProjectDto

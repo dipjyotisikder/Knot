@@ -30,7 +30,7 @@ namespace Knot.Utilities
         /// <param name="type">The type to search.</param>
         /// <param name="propertyName">The name of the property.</param>
         /// <returns>The PropertyInfo if found; otherwise, null.</returns>
-        public static PropertyInfo GetProperty(Type type, string propertyName)
+        public static PropertyInfo? GetProperty(Type type, string propertyName)
         {
             if (type == null)
             {
@@ -73,7 +73,7 @@ namespace Knot.Utilities
         /// <param name="obj">The object instance.</param>
         /// <param name="propertyName">The name of the property.</param>
         /// <returns>The property value.</returns>
-        public static object GetPropertyValue(object obj, string propertyName)
+        public static object? GetPropertyValue(object obj, string propertyName)
         {
             if (obj == null)
             {

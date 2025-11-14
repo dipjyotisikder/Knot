@@ -10,17 +10,17 @@ namespace Knot.Exceptions
         /// <summary>
         /// Gets the source type.
         /// </summary>
-        public Type SourceType { get; }
+        public Type? SourceType { get; }
 
         /// <summary>
         /// Gets the destination type.
         /// </summary>
-        public Type DestinationType { get; }
+        public Type? DestinationType { get; }
 
         /// <summary>
         /// Gets the value that failed to convert.
         /// </summary>
-        public object Value { get; }
+        public object? Value { get; }
 
         /// <summary>
         /// Initializes a new instance of the TypeConversionException class.

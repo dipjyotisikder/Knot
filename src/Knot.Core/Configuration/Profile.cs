@@ -7,7 +7,7 @@ namespace Knot.Configuration
     /// </summary>
     public abstract class Profile
     {
-        private MapperConfiguration _configuration;
+        private MapperConfiguration _configuration = null!;
 
         /// <summary>
         /// Gets the profile name.

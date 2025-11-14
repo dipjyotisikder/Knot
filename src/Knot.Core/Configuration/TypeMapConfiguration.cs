@@ -46,7 +46,7 @@ namespace Knot.Configuration
             var destProperty = ExpressionHelper.GetPropertyInfo(destinationMember);
 
             // Find existing property map or create new one
-            PropertyMap propertyMap = null;
+            PropertyMap? propertyMap = null;
             foreach (var pm in _typeMap.PropertyMaps)
             {
                 if (pm.DestinationProperty == destProperty)
@@ -58,12 +58,12 @@ namespace Knot.Configuration
 
             if (propertyMap == null)
             {
-                propertyMap = new PropertyMap(null, destProperty);
+                propertyMap = new PropertyMap(null!, destProperty);
                 _typeMap.PropertyMaps.Add(propertyMap);
             }
 
             // Set the custom value resolver
-            propertyMap.ValueResolver = source => valueResolver((TSource)source);
+            propertyMap.ValueResolver = source => valueResolver((TSource)source)!;
 
             return this;
         }
@@ -122,7 +122,7 @@ namespace Knot.Configuration
             var sourceProperty = ExpressionHelper.GetPropertyInfo(sourceMember);
 
             // Find existing property map or create new one
-            PropertyMap propertyMap = null;
+            PropertyMap? propertyMap = null;
             foreach (var pm in _typeMap.PropertyMaps)
             {
                 if (pm.DestinationProperty == destProperty)

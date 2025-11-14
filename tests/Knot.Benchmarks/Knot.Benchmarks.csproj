@@ -12,7 +12,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Knot.Core\Knot.Core.csproj" />
+	  <ProjectReference Include="..\..\src\Knot.Core\Knot.Core.csproj" />
 	</ItemGroup>
 
 </Project>

@@ -33,7 +33,7 @@ namespace Knot
         {
             if (source == null)
             {
-                return default;
+                return default!;
             }
 
             var sourceType = source.GetType();
@@ -50,7 +50,7 @@ namespace Knot
         {
             if (source == null)
             {
-                return default;
+                return default!;
             }
 
             var context = new MappingContext(source, typeof(TSource), typeof(TDestination));

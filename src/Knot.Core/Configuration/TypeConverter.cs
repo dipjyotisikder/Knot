@@ -31,11 +31,11 @@ namespace Knot.Configuration
         /// </summary>
         /// <param name="source">The source value.</param>
         /// <returns>The converted destination value.</returns>
-        public override object Convert(object source)
+        public override object? Convert(object source)
         {
             if (source == null)
             {
-                return default(TDestination);
+                return default(TDestination)!;
             }
 
             if (!(source is TSource typedSource))
@@ -67,6 +67,6 @@ namespace Knot.Configuration
         /// </summary>
         /// <param name="source">The source value.</param>
         /// <returns>The converted destination value.</returns>
-        public abstract object Convert(object source);
+        public abstract object? Convert(object source);
     }
 }
