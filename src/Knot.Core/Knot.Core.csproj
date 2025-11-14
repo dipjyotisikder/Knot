@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<!-- Target Framework -->
@@ -51,9 +51,9 @@
 
 	<!-- Package Files -->
 	<ItemGroup>
-		<None Include="..\README.md" Pack="true" PackagePath="\" />
+		<None Include="..\..\README.md" Pack="true" PackagePath="\" />
 		<None Include="Assets\logo.png" Pack="true" PackagePath="\" />
-		<None Include="..\LICENSE" Pack="true" PackagePath="\" Condition="Exists('..\LICENSE')" />
+		<None Include="..\..\LICENSE" Pack="true" PackagePath="\" Condition="Exists('..\..\LICENSE')" />
 	</ItemGroup>
 
 	<!-- Assembly Attributes for Testing -->

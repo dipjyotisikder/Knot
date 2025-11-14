@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   Collection mapping now properly handles empty collections when element type mappings are not registered
+-   Improved error messages for missing collection element type mappings
+
 ### Planned
 
 -   Circular reference detection
