@@ -27,10 +27,20 @@
     <RepositoryUrl>https://github.com/dipjyotisikder/Knot</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     
-    <!-- Source Link -->
+    <!-- Source Link (moved to conditional section below) -->
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
+  </PropertyGroup>
+  
+  <!-- Debug Settings - Only for Debug builds, not Release -->
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
     <DebugType>embedded</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  
+  <!-- Release Settings - Portable PDB for NuGet symbol packages -->
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <DebugType>portable</DebugType>
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
 
