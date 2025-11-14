@@ -1,7 +1,7 @@
+using System;
 using Knot.Configuration;
 using Knot.Exceptions;
 using Knot.Mapping;
-using System;
 
 namespace Knot
 {
@@ -93,7 +93,7 @@ namespace Knot
                     $"Ensure that CreateMap<{context.SourceType.Name}, {context.DestinationType.Name}>() has been called during configuration.");
             }
 
-            return typeMap.Execute(context);
+            return typeMap.Execute(context, (IMappingEngine)this);
         }
     }
 }

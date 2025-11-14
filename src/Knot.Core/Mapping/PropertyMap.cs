@@ -1,7 +1,10 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using Knot.Exceptions;
 using Knot.Utilities;
-using System;
-using System.Reflection;
 
 namespace Knot.Mapping
 {
@@ -76,7 +79,8 @@ namespace Knot.Mapping
         /// </summary>
         /// <param name="source">The source object.</param>
         /// <param name="destination">The destination object.</param>
-        public void Execute(object source, object destination)
+        /// <param name="mappingEngine">The mapping engine for nested mappings.</param>
+        public void Execute(object source, object destination, IMappingEngine mappingEngine)
         {
             if (source == null)
             {
@@ -103,6 +107,12 @@ namespace Knot.Mapping
             {
                 // Use compiled getter (20-50x faster than reflection)
                 value = _compiledGetter(source);
+
+                // Handle nested object mapping
+                if (value != null && _sourceProperty != null)
+                {
+                    value = MapNestedValue(value, _sourceProperty.PropertyType, DestinationProperty.PropertyType, mappingEngine);
+                }
             }
             else
             {
@@ -112,7 +122,7 @@ namespace Knot.Mapping
             try
             {
                 // Use compiled setter (20-50x faster than reflection)
-                _compiledSetter(destination, value);
+                _compiledSetter(destination, value!);
             }
             catch (ArgumentException ex)
             {
@@ -120,6 +130,233 @@ namespace Knot.Mapping
                     $"Failed to set property '{DestinationProperty.Name}'. " +
                     $"Type mismatch or conversion error.", ex);
             }
+        }
+
+        private object MapNestedValue(object value, Type sourceType, Type destinationType, IMappingEngine mappingEngine)
+        {
+            // If types are the same or destination type is assignable from source type, no mapping needed
+            if (sourceType == destinationType || destinationType.IsAssignableFrom(sourceType))
+            {
+                return value;
+            }
+
+            // Check if it's a simple type that doesn't need nested mapping
+            if (IsSimpleType(sourceType) || IsSimpleType(destinationType))
+            {
+                return value;
+            }
+
+            // Handle collections (List, Array, IEnumerable, etc.)
+            if (IsCollectionType(sourceType) && IsCollectionType(destinationType))
+            {
+                return MapCollection(value, sourceType, destinationType, mappingEngine);
+            }
+
+            // Handle complex nested objects
+            if (sourceType.IsClass && destinationType.IsClass)
+            {
+                var typeMap = mappingEngine.Registry.GetTypeMap(sourceType, destinationType);
+                if (typeMap != null)
+                {
+                    var context = new MappingContext(value, sourceType, destinationType);
+                    return mappingEngine.Execute(context);
+                }
+            }
+
+            return value;
+        }
+
+        private object MapCollection(object sourceCollection, Type sourceType, Type destinationType, IMappingEngine mappingEngine)
+        {
+            if (sourceCollection == null)
+            {
+                return null!;
+            }
+
+            var sourceEnumerable = sourceCollection as IEnumerable;
+            if (sourceEnumerable == null)
+            {
+                return sourceCollection;
+            }
+
+            // Get element types
+            var sourceElementType = GetCollectionElementType(sourceType);
+            var destElementType = GetCollectionElementType(destinationType);
+
+            if (sourceElementType == null || destElementType == null)
+            {
+                return sourceCollection;
+            }
+
+            // Map each element in the collection (even if empty, we need to create the right type)
+            var mappedList = new List<object>();
+
+            // If element types differ, check if we have a mapping and map each item
+            if (sourceElementType != destElementType)
+            {
+                var elementTypeMap = mappingEngine.Registry.GetTypeMap(sourceElementType, destElementType);
+                if (elementTypeMap == null)
+                {
+                    // No mapping available for element types
+                    // Check if collection is empty - if so, return empty collection of correct type
+                    bool isEmpty = true;
+                    foreach (var item in sourceEnumerable)
+                    {
+                        isEmpty = false;
+                        break;
+                    }
+
+                    if (isEmpty)
+                    {
+                        // Return empty collection of the correct destination type
+                        return CreateEmptyCollection(destinationType, destElementType);
+                    }
+                    else
+                    {
+                        // Collection has items but no mapping - throw exception
+                        throw new MappingException(
+                            $"Cannot map collection elements from {sourceElementType.Name} to {destElementType.Name}. " +
+                            $"No mapping configured for these types. Please add a mapping using CreateMap<{sourceElementType.Name}, {destElementType.Name}>().");
+                    }
+                }
+
+                foreach (var item in sourceEnumerable)
+                {
+                    if (item == null)
+                    {
+                        mappedList.Add(null!);
+                    }
+                    else
+                    {
+                        var context = new MappingContext(item, sourceElementType, destElementType);
+                        var mappedItem = mappingEngine.Execute(context);
+                        mappedList.Add(mappedItem);
+                    }
+                }
+            }
+            else
+            {
+                // Element types are the same, just copy items
+                foreach (var item in sourceEnumerable)
+                {
+                    mappedList.Add(item);
+                }
+            }
+
+            // Convert to the destination collection type
+            if (destinationType.IsArray)
+            {
+                var array = Array.CreateInstance(destElementType, mappedList.Count);
+                for (int i = 0; i < mappedList.Count; i++)
+                {
+                    array.SetValue(mappedList[i], i);
+                }
+                return array;
+            }
+            else if (destinationType.IsGenericType)
+            {
+                var genericTypeDef = destinationType.GetGenericTypeDefinition();
+                if (genericTypeDef == typeof(List<>) || genericTypeDef == typeof(IList<>) ||
+                    genericTypeDef == typeof(ICollection<>) || genericTypeDef == typeof(IEnumerable<>))
+                {
+                    var listType = typeof(List<>).MakeGenericType(destElementType);
+                    var list = Activator.CreateInstance(listType) as IList;
+                    foreach (var item in mappedList)
+                    {
+                        list!.Add(item);
+                    }
+                    return list!;
+                }
+            }
+
+            return mappedList;
+        }
+
+        private bool IsSimpleType(Type type)
+        {
+            return type.IsPrimitive ||
+                   type.IsEnum ||
+                   type == typeof(string) ||
+                   type == typeof(decimal) ||
+                   type == typeof(DateTime) ||
+                   type == typeof(DateTimeOffset) ||
+                   type == typeof(TimeSpan) ||
+                   type == typeof(Guid) ||
+                   (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>) &&
+                    IsSimpleType(Nullable.GetUnderlyingType(type)!));
+        }
+
+        private bool IsCollectionType(Type type)
+        {
+            if (type == typeof(string))
+            {
+                return false;
+            }
+
+            return type.IsArray ||
+                   (type.IsGenericType &&
+                    (type.GetGenericTypeDefinition() == typeof(List<>) ||
+                     type.GetGenericTypeDefinition() == typeof(IList<>) ||
+                     type.GetGenericTypeDefinition() == typeof(ICollection<>) ||
+                     type.GetGenericTypeDefinition() == typeof(IEnumerable<>))) ||
+                   typeof(IEnumerable).IsAssignableFrom(type);
+        }
+
+        private Type? GetCollectionElementType(Type type)
+        {
+            if (type.IsArray)
+            {
+                return type.GetElementType();
+            }
+
+            if (type.IsGenericType)
+            {
+                var genericArgs = type.GetGenericArguments();
+                if (genericArgs.Length == 1)
+                {
+                    return genericArgs[0];
+                }
+            }
+
+            // For non-generic IEnumerable, we can't determine the element type
+            if (typeof(IEnumerable).IsAssignableFrom(type))
+            {
+                // Try to find a generic IEnumerable<T> interface
+                var enumerableInterface = type.GetInterfaces()
+                    .FirstOrDefault(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IEnumerable<>));
+
+                if (enumerableInterface != null)
+                {
+                    return enumerableInterface.GetGenericArguments()[0];
+                }
+            }
+
+            return null;
+        }
+
+        private object CreateEmptyCollection(Type destinationType, Type elementType)
+        {
+            // Create empty array
+            if (destinationType.IsArray)
+            {
+                return Array.CreateInstance(elementType, 0);
+            }
+
+            // Create empty list/collection
+            if (destinationType.IsGenericType)
+            {
+                var genericTypeDef = destinationType.GetGenericTypeDefinition();
+                if (genericTypeDef == typeof(List<>) || genericTypeDef == typeof(IList<>) ||
+                    genericTypeDef == typeof(ICollection<>) || genericTypeDef == typeof(IEnumerable<>))
+                {
+                    var listType = typeof(List<>).MakeGenericType(elementType);
+                    return Activator.CreateInstance(listType)!;
+                }
+            }
+
+            // Default to empty list
+            var defaultListType = typeof(List<>).MakeGenericType(elementType);
+            return Activator.CreateInstance(defaultListType)!;
         }
     }
 }
