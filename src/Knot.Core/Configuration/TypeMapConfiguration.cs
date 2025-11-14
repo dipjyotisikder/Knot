@@ -1,7 +1,7 @@
-using Knot.Mapping;
-using Knot.Utilities;
 using System;
 using System.Linq.Expressions;
+using Knot.Mapping;
+using Knot.Utilities;
 
 namespace Knot.Configuration
 {

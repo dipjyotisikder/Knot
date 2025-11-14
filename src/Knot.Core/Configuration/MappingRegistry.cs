@@ -1,8 +1,8 @@
-using Knot.Mapping;
-using Knot.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Knot.Mapping;
+using Knot.Utilities;
 
 namespace Knot.Configuration
 {
