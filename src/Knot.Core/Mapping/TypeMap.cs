@@ -1,7 +1,7 @@
-using Knot.Exceptions;
-using Knot.Utilities;
 using System;
 using System.Collections.Generic;
+using Knot.Exceptions;
+using Knot.Utilities;
 
 namespace Knot.Mapping
 {
@@ -46,12 +46,18 @@ namespace Knot.Mapping
         /// Executes the mapping for the given context.
         /// </summary>
         /// <param name="context">The mapping context.</param>
+        /// <param name="mappingEngine">The mapping engine for nested mappings.</param>
         /// <returns>The mapped destination object.</returns>
-        public object Execute(MappingContext context)
+        public object Execute(MappingContext context, IMappingEngine mappingEngine)
         {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
+            }
+
+            if (mappingEngine == null)
+            {
+                throw new ArgumentNullException(nameof(mappingEngine));
             }
 
             var destination = context.DestinationValue ?? CreateDestinationInstance();
@@ -60,7 +66,7 @@ namespace Knot.Mapping
             {
                 try
                 {
-                    propertyMap.Execute(context.SourceValue, destination);
+                    propertyMap.Execute(context.SourceValue, destination, mappingEngine);
                 }
                 catch (Exception ex)
                 {
