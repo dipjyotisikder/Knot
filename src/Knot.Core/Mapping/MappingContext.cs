@@ -5,7 +5,7 @@ namespace Knot.Mapping
     /// <summary>
     /// Represents the context for a mapping operation.
     /// </summary>
-     internal class MappingContext
+    internal class MappingContext
     {
         /// <summary>
         /// Gets the source value being mapped.

@@ -1,4 +1,4 @@
-﻿# Knot
+# Knot
 
 A lightweight and efficient object-to-object mapping library for .NET Standard 2.0 and above. Knot simplifies the mapping of properties between different types with minimal configuration.
 

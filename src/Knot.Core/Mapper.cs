@@ -1,5 +1,5 @@
-using Knot.Configuration;
 using System;
+using Knot.Configuration;
 
 namespace Knot
 {
