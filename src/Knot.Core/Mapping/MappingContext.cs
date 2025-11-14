@@ -25,7 +25,7 @@ namespace Knot.Mapping
         /// <summary>
         /// Gets the destination value, if mapping to an existing instance.
         /// </summary>
-        public object DestinationValue { get; }
+        public object? DestinationValue { get; }
 
         /// <summary>
         /// Initializes a new instance of the MappingContext class.
@@ -34,7 +34,7 @@ namespace Knot.Mapping
         /// <param name="sourceType">The source type.</param>
         /// <param name="destinationType">The destination type.</param>
         public MappingContext(object sourceValue, Type sourceType, Type destinationType)
-     : this(sourceValue, sourceType, destinationType, null)
+     : this(sourceValue, sourceType, destinationType, null!)
         {
         }
 
@@ -45,7 +45,7 @@ namespace Knot.Mapping
         /// <param name="sourceType">The source type.</param>
         /// <param name="destinationType">The destination type.</param>
         /// <param name="destinationValue">The existing destination value.</param>
-        public MappingContext(object sourceValue, Type sourceType, Type destinationType, object destinationValue)
+        public MappingContext(object sourceValue, Type sourceType, Type destinationType, object? destinationValue)
         {
             SourceValue = sourceValue;
             SourceType = sourceType ?? throw new ArgumentNullException(nameof(sourceType));

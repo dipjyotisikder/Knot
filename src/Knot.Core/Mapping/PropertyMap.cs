@@ -10,14 +10,14 @@ namespace Knot.Mapping
     /// </summary>
     internal class PropertyMap
     {
-        private Func<object, object> _compiledGetter;
-        private Action<object, object> _compiledSetter;
-        private PropertyInfo _sourceProperty;
+        private Func<object, object>? _compiledGetter;
+        private Action<object, object>? _compiledSetter;
+        private PropertyInfo? _sourceProperty;
 
         /// <summary>
         /// Gets the source property information.
         /// </summary>
-        public PropertyInfo SourceProperty => _sourceProperty;
+        public PropertyInfo? SourceProperty => _sourceProperty;
 
         /// <summary>
         /// Gets the destination property information.
@@ -27,7 +27,7 @@ namespace Knot.Mapping
         /// <summary>
         /// Gets or sets the custom value resolver function.
         /// </summary>
-        public Func<object, object> ValueResolver { get; set; }
+        public Func<object, object>? ValueResolver { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the PropertyMap class.

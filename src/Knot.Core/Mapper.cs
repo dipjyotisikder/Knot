@@ -8,7 +8,7 @@ namespace Knot
     /// </summary>
     public static class Mapper
     {
-        private static IMapper _instance;
+        private static IMapper _instance = null!;
         private static readonly object _lock = new object();
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace Knot
         {
             lock (_lock)
             {
-                _instance = null;
+                _instance = null!;
             }
         }
 

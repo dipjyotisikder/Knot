@@ -1,11 +1,27 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.14.36623.8 d17.14
+# Visual Studio Version 18
+VisualStudioVersion = 18.0.11205.157 d18.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Knot.Core", "Knot.Core\Knot.Core.csproj", "{68562626-4F39-4A74-832A-1362677062DC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Knot.Core", "src\Knot.Core\Knot.Core.csproj", "{C259088F-4C9D-6C04-C682-D7EC7C3FE42B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Knot.Benchmarks", "Knot.Benchmarks\Knot.Benchmarks.csproj", "{91F14879-F135-2490-EE97-0E63ABAFEBFE}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B3F21ADE-67E3-4DF0-AE8E-F4921F8B998C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{147EA60F-B25E-4334-9971-8DEE74EED496}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples", "examples", "{5DAEE869-CD19-43BB-9D52-82C220CBFE03}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Knot.Benchmarks", "tests\Knot.Benchmarks\Knot.Benchmarks.csproj", "{15A7F57A-3EE2-A4DA-FC62-905452B179DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicMapping", "samples\BasicMapping\BasicMapping.csproj", "{A5801946-1D34-0C99-4ADD-471C4C72EDA7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CollectionMapping", "samples\CollectionMapping\CollectionMapping.csproj", "{E8D919FA-5D1B-AC6F-9851-4B7DB320F8BC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomPropertyMapping", "samples\CustomPropertyMapping\CustomPropertyMapping.csproj", "{A6F84B4A-B570-3176-C38E-E9A0EDAA7B79}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MappingProfiles", "samples\MappingProfiles\MappingProfiles.csproj", "{9BFAC89B-443C-B80E-494B-711CF5C055DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NestedObjects", "samples\NestedObjects\NestedObjects.csproj", "{C846FCF6-F239-2CBC-EFA5-80391EAC8845}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,17 +29,46 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{68562626-4F39-4A74-832A-1362677062DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{68562626-4F39-4A74-832A-1362677062DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{68562626-4F39-4A74-832A-1362677062DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{68562626-4F39-4A74-832A-1362677062DC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{91F14879-F135-2490-EE97-0E63ABAFEBFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{91F14879-F135-2490-EE97-0E63ABAFEBFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{91F14879-F135-2490-EE97-0E63ABAFEBFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{91F14879-F135-2490-EE97-0E63ABAFEBFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C259088F-4C9D-6C04-C682-D7EC7C3FE42B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C259088F-4C9D-6C04-C682-D7EC7C3FE42B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C259088F-4C9D-6C04-C682-D7EC7C3FE42B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C259088F-4C9D-6C04-C682-D7EC7C3FE42B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15A7F57A-3EE2-A4DA-FC62-905452B179DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15A7F57A-3EE2-A4DA-FC62-905452B179DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15A7F57A-3EE2-A4DA-FC62-905452B179DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15A7F57A-3EE2-A4DA-FC62-905452B179DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5801946-1D34-0C99-4ADD-471C4C72EDA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5801946-1D34-0C99-4ADD-471C4C72EDA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5801946-1D34-0C99-4ADD-471C4C72EDA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5801946-1D34-0C99-4ADD-471C4C72EDA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8D919FA-5D1B-AC6F-9851-4B7DB320F8BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8D919FA-5D1B-AC6F-9851-4B7DB320F8BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8D919FA-5D1B-AC6F-9851-4B7DB320F8BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8D919FA-5D1B-AC6F-9851-4B7DB320F8BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6F84B4A-B570-3176-C38E-E9A0EDAA7B79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6F84B4A-B570-3176-C38E-E9A0EDAA7B79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6F84B4A-B570-3176-C38E-E9A0EDAA7B79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6F84B4A-B570-3176-C38E-E9A0EDAA7B79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BFAC89B-443C-B80E-494B-711CF5C055DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BFAC89B-443C-B80E-494B-711CF5C055DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BFAC89B-443C-B80E-494B-711CF5C055DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BFAC89B-443C-B80E-494B-711CF5C055DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C846FCF6-F239-2CBC-EFA5-80391EAC8845}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C846FCF6-F239-2CBC-EFA5-80391EAC8845}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C846FCF6-F239-2CBC-EFA5-80391EAC8845}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C846FCF6-F239-2CBC-EFA5-80391EAC8845}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C259088F-4C9D-6C04-C682-D7EC7C3FE42B} = {B3F21ADE-67E3-4DF0-AE8E-F4921F8B998C}
+		{15A7F57A-3EE2-A4DA-FC62-905452B179DD} = {147EA60F-B25E-4334-9971-8DEE74EED496}
+		{A5801946-1D34-0C99-4ADD-471C4C72EDA7} = {5DAEE869-CD19-43BB-9D52-82C220CBFE03}
+		{E8D919FA-5D1B-AC6F-9851-4B7DB320F8BC} = {5DAEE869-CD19-43BB-9D52-82C220CBFE03}
+		{A6F84B4A-B570-3176-C38E-E9A0EDAA7B79} = {5DAEE869-CD19-43BB-9D52-82C220CBFE03}
+		{9BFAC89B-443C-B80E-494B-711CF5C055DF} = {5DAEE869-CD19-43BB-9D52-82C220CBFE03}
+		{C846FCF6-F239-2CBC-EFA5-80391EAC8845} = {5DAEE869-CD19-43BB-9D52-82C220CBFE03}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E3A405D5-2821-4F24-8036-8990A76C9E76}

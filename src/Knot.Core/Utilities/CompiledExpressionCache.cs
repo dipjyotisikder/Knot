@@ -39,7 +39,7 @@ namespace Knot.Utilities
         /// </summary>
         /// <param name="property">The property to create a getter for.</param>
         /// <returns>A compiled getter function.</returns>
-        public static Func<object, object> GetOrCreateGetter(PropertyInfo property)
+        public static Func<object, object>? GetOrCreateGetter(PropertyInfo property)
         {
             if (property == null || !property.CanRead)
             {
@@ -55,7 +55,7 @@ namespace Knot.Utilities
         /// </summary>
         /// <param name="property">The property to create a setter for.</param>
         /// <returns>A compiled setter function.</returns>
-        public static Action<object, object> GetOrCreateSetter(PropertyInfo property)
+        public static Action<object, object>? GetOrCreateSetter(PropertyInfo property)
         {
             if (property == null || !property.CanWrite)
             {

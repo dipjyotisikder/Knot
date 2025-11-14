@@ -55,7 +55,7 @@ namespace Knot.Extensions
         /// <param name="source">The source collection.</param>
         /// <param name="mapper">The mapper instance.</param>
         /// <returns>A collection of mapped destination objects.</returns>
-        public static IEnumerable<TDestination> MapTo<TSource, TDestination>(this IEnumerable<TSource> source,
+        public static IEnumerable<TDestination>? MapTo<TSource, TDestination>(this IEnumerable<TSource> source,
                                                                              IMapper mapper)
         {
             if (source == null)
@@ -79,7 +79,7 @@ namespace Knot.Extensions
         /// <param name="source">The source collection.</param>
         /// <param name="mapper">The mapper instance.</param>
         /// <returns>A list of mapped destination objects.</returns>
-        public static List<TDestination> MapToList<TSource, TDestination>(this IEnumerable<TSource> source,
+        public static List<TDestination>? MapToList<TSource, TDestination>(this IEnumerable<TSource> source,
                                                                           IMapper mapper)
         {
             if (source == null)
@@ -103,7 +103,7 @@ namespace Knot.Extensions
         /// <param name="source">The source collection.</param>
         /// <param name="mapper">The mapper instance.</param>
         /// <returns>An array of mapped destination objects.</returns>
-        public static TDestination[] MapToArray<TSource, TDestination>(this IEnumerable<TSource> source,
+        public static TDestination[]? MapToArray<TSource, TDestination>(this IEnumerable<TSource> source,
                                                                        IMapper mapper)
         {
             if (source == null)

@@ -10,12 +10,12 @@ namespace Knot.Exceptions
         /// <summary>
         /// Gets the name of the missing property.
         /// </summary>
-        public string PropertyName { get; }
+        public string? PropertyName { get; }
 
         /// <summary>
         /// Gets the type that is missing the property.
         /// </summary>
-        public Type Type { get; }
+        public Type? Type { get; }
 
         /// <summary>
         /// Initializes a new instance of the MissingPropertyException class.

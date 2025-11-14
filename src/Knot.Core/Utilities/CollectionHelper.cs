@@ -44,7 +44,7 @@ namespace Knot.Utilities
 
             if (type.IsArray)
             {
-                return type.GetElementType();
+                return type.GetElementType()!;
             }
 
             if (type.IsGenericType)
@@ -89,7 +89,7 @@ namespace Knot.Utilities
         /// <param name="source">The source collection.</param>
         /// <param name="elementType">The element type.</param>
         /// <returns>A list containing the elements.</returns>
-        public static object ToList(IEnumerable source, Type elementType)
+        public static object? ToList(IEnumerable source, Type elementType)
         {
             if (source == null)
             {
@@ -106,7 +106,7 @@ namespace Knot.Utilities
 
             foreach (var item in source)
             {
-                addMethod.Invoke(list, new[] { item });
+                addMethod!.Invoke(list, new[] { item });
             }
 
             return list;
@@ -118,7 +118,7 @@ namespace Knot.Utilities
         /// <param name="source">The source collection.</param>
         /// <param name="elementType">The element type.</param>
         /// <returns>An array containing the elements.</returns>
-        public static object ToArray(IEnumerable source, Type elementType)
+        public static object? ToArray(IEnumerable source, Type elementType)
         {
             if (source == null)
             {
