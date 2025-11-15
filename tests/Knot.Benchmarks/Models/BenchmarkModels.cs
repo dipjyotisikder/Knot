@@ -1,6 +1,7 @@
 namespace Knot.Benchmarks.Models
 {
-    // Simple models for basic mapping benchmarks
+    // Models for basic mapping benchmarks
+
     public class SimpleSource
     {
         public int Id { get; set; }
@@ -19,7 +20,7 @@ namespace Knot.Benchmarks.Models
         public bool IsActive { get; set; }
     }
 
-    // Complex models with nested objects
+    // Models with nested objects
     public class ComplexSource
     {
         public int Id { get; set; }

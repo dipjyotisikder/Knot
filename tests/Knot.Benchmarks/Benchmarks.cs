@@ -6,7 +6,7 @@ using Knot.Configuration;
 namespace Knot.Benchmarks
 {
     /// <summary>
-    /// Benchmarks for simple object mapping scenarios
+    /// Benchmarks for simple object mapping
     /// </summary>
     [MemoryDiagnoser]
     [Orderer(SummaryOrderPolicy.FastestToSlowest)]
@@ -70,7 +70,7 @@ namespace Knot.Benchmarks
     }
 
     /// <summary>
-    /// Benchmarks for collection mapping scenarios
+    /// Benchmarks for collection mapping
     /// </summary>
     [MemoryDiagnoser]
     [Orderer(SummaryOrderPolicy.FastestToSlowest)]
@@ -149,7 +149,7 @@ namespace Knot.Benchmarks
     }
 
     /// <summary>
-    /// Benchmarks for complex object mapping with custom resolvers
+    /// Benchmarks for complex object mapping
     /// </summary>
     [MemoryDiagnoser]
     [Orderer(SummaryOrderPolicy.FastestToSlowest)]
