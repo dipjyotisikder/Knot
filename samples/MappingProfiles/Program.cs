@@ -9,7 +9,7 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        Console.WriteLine("KNOT MAPPING PROFILES EXAMPLE\n");
+        Console.WriteLine("Knot Mapping Profiles Example\n");
 
         // Configure mapper with multiple profiles
         var config = new MapperConfiguration(cfg =>
@@ -22,7 +22,7 @@ public class Program
         var mapper = config.CreateMapper();
 
         // Example 1: User Mappings
-        Console.WriteLine("EXAMPLE 1: USER PROFILE MAPPINGS\n");
+        Console.WriteLine("Example 1: User profile mappings\n");
 
         var user = new User
         {
@@ -45,7 +45,7 @@ public class Program
         Console.WriteLine("Profile Applied:    UserMappingProfile\n");
 
         // Example 2: Product Mappings
-        Console.WriteLine("EXAMPLE 2: PRODUCT PROFILE MAPPINGS\n");
+        Console.WriteLine("Example 2: Product profile mappings\n");
 
         var products = new List<Product>
         {
@@ -65,7 +65,7 @@ public class Program
         Console.WriteLine("Profile Applied:    ProductMappingProfile\n");
 
         // Example 3: Order Mappings with Nested Objects
-        Console.WriteLine("EXAMPLE 3: ORDER PROFILE MAPPINGS\n");
+        Console.WriteLine("Example 3: Order profile mappings\n");
 
         var order = new Order
         {
@@ -94,14 +94,6 @@ public class Program
         Console.WriteLine("  2. ProductMappingProfile    - Product entity mappings");
         Console.WriteLine("  3. OrderMappingProfile      - Order entity mappings");
         Console.WriteLine();
-        Console.WriteLine("Key Benefits:");
-        Console.WriteLine("  - Modular organization by domain entity");
-        Console.WriteLine("  - Simplified maintenance and updates");
-        Console.WriteLine("  - Reusable across multiple applications");
-        Console.WriteLine("  - Enhanced team collaboration");
-        Console.WriteLine("  - Clear separation of mapping concerns");
-        Console.WriteLine("  - Scalable architecture for large projects\n");
-
         Console.WriteLine("Press any key to exit...");
         Console.ReadKey();
     }

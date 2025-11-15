@@ -7,23 +7,20 @@ internal class Program
 {
     public static void Main(string[] args)
     {
-        Console.WriteLine("KNOT BASIC MAPPING EXAMPLE\n");
+        Console.WriteLine("Knot Basic Mapping Example\n");
 
-        // Step 1: Define your source and destination models
-        // (See Models.cs)
-
-        // Step 2: Configure the mapper
+        // Define mappers for source and destination models
         var config = new MapperConfiguration(cfg =>
         {
             cfg.CreateMap<Person, PersonDto>();
             cfg.CreateMap<Employee, EmployeeDto>();
         });
 
-        // Step 3: Create the mapper instance
+        // Create mapper instance
         var mapper = config.CreateMapper();
 
         // Example 1: Simple Person mapping
-        Console.WriteLine("EXAMPLE 1: SIMPLE PERSON MAPPING\n");
+        Console.WriteLine("Example 1: Simple person mapping\n");
 
         var person = new Person
         {
@@ -35,12 +32,12 @@ internal class Program
 
         var personDto = mapper.Map<PersonDto>(person);
 
-        Console.WriteLine($"Source Object:  {person.FirstName} {person.LastName}, Age: {person.Age}, Email: {person.Email}");
-        Console.WriteLine($"Mapped Result:  {personDto.FirstName} {personDto.LastName}, Age: {personDto.Age}, Email: {personDto.Email}");
+        Console.WriteLine($"Source object:  {person.FirstName} {person.LastName}, Age: {person.Age}, Email: {person.Email}");
+        Console.WriteLine($"Mapped result:  {personDto.FirstName} {personDto.LastName}, Age: {personDto.Age}, Email: {personDto.Email}");
         Console.WriteLine("Status:         Mapping completed successfully\n");
 
-        // Example 2: Employee mapping (with automatic ignoring)
-        Console.WriteLine("EXAMPLE 2: EMPLOYEE MAPPING\n");
+        // Example 2: Employee mapping (automatic field exclusion)
+        Console.WriteLine("Example 2: Employee mapping\n");
 
         var employee = new Employee
         {
@@ -54,14 +51,14 @@ internal class Program
 
         var employeeDto = mapper.Map<EmployeeDto>(employee);
 
-        Console.WriteLine($"Source Object:  ID: {employee.Id}, Name: {employee.FirstName} {employee.LastName}");
+        Console.WriteLine($"Source object:  ID: {employee.Id}, Name: {employee.FirstName} {employee.LastName}");
         Console.WriteLine($"                Salary: ${employee.Salary:N2}, Email: {employee.Email}");
-        Console.WriteLine($"Mapped Result:  ID: {employeeDto.Id}, Name: {employeeDto.FirstName} {employeeDto.LastName}");
+        Console.WriteLine($"Mapped result:  ID: {employeeDto.Id}, Name: {employeeDto.FirstName} {employeeDto.LastName}");
         Console.WriteLine($"                Email: {employeeDto.Email}");
         Console.WriteLine("Note:           Salary property not mapped (not present in destination DTO)\n");
 
         // Example 3: Mapping to existing instance
-        Console.WriteLine("EXAMPLE 3: UPDATE EXISTING INSTANCE\n");
+        Console.WriteLine("Example 3: Update existing instance\n");
 
         var existingPerson = new PersonDto
         {
@@ -71,11 +68,11 @@ internal class Program
             Email = "old@example.com"
         };
 
-        Console.WriteLine($"Before Update:  {existingPerson.FirstName} {existingPerson.LastName}, Age: {existingPerson.Age}");
+        Console.WriteLine($"Before update:  {existingPerson.FirstName} {existingPerson.LastName}, Age: {existingPerson.Age}");
 
         mapper.Map(person, existingPerson);
 
-        Console.WriteLine($"After Update:   {existingPerson.FirstName} {existingPerson.LastName}, Age: {existingPerson.Age}");
+        Console.WriteLine($"After update:   {existingPerson.FirstName} {existingPerson.LastName}, Age: {existingPerson.Age}");
         Console.WriteLine("Status:         Existing instance updated successfully\n");
 
         Console.WriteLine("Press any key to exit...");

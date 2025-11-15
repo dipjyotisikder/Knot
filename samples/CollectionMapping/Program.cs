@@ -10,7 +10,7 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        Console.WriteLine("KNOT COLLECTION MAPPING EXAMPLE\n");
+        Console.WriteLine("Knot Collection Mapping Example\n");
 
         // Configure mappings
         var config = new MapperConfiguration(cfg =>
@@ -23,7 +23,7 @@ public class Program
         var mapper = config.CreateMapper();
 
         // Example 1: List Mapping
-        Console.WriteLine("EXAMPLE 1: LIST TO LIST MAPPING\n");
+        Console.WriteLine("Example 1: List to list mapping\n");
 
         var customers = new List<Customer>
         {
@@ -43,7 +43,7 @@ public class Program
         Console.WriteLine("Status:             All customers mapped successfully\n");
 
         // Example 2: Array Mapping
-        Console.WriteLine("EXAMPLE 2: LIST TO ARRAY MAPPING\n");
+        Console.WriteLine("Example 2: List to array mapping\n");
 
         var orders = new List<Order>
         {
@@ -63,7 +63,7 @@ public class Program
         Console.WriteLine("Status:             All orders mapped to array successfully\n");
 
         // Example 3: IEnumerable Mapping with LINQ
-        Console.WriteLine("EXAMPLE 3: FILTERED COLLECTION MAPPING\n");
+        Console.WriteLine("Example 3: Filtered collection mapping\n");
 
         var products = new List<Product>
         {
@@ -90,7 +90,7 @@ public class Program
         Console.WriteLine("Status:             Filtered and mapped successfully\n");
 
         // Example 4: Empty Collection Handling
-        Console.WriteLine("EXAMPLE 4: EMPTY COLLECTION HANDLING\n");
+        Console.WriteLine("Example 4: Empty collection handling\n");
 
         var emptyList = new List<Customer>();
         var emptyResult = emptyList.MapToList<Customer, CustomerDto>(mapper);
@@ -100,7 +100,7 @@ public class Program
         Console.WriteLine("Status:             Empty collections handled gracefully without errors\n");
 
         // Example 5: Large Collection Performance
-        Console.WriteLine("EXAMPLE 5: LARGE COLLECTION PERFORMANCE\n");
+        Console.WriteLine("Example 5: Large collection performance\n");
 
         var largeCollection = Enumerable.Range(1, 10000)
             .Select(i => new Customer

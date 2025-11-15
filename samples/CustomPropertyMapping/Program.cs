@@ -7,7 +7,7 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        Console.WriteLine("KNOT CUSTOM PROPERTY MAPPING EXAMPLE\n");
+        Console.WriteLine("Knot Custom Property Mapping Example\n");
 
         // Configure mapper with custom property mappings
         var config = new MapperConfiguration(cfg =>
@@ -45,7 +45,7 @@ public class Program
         var mapper = config.CreateMapper();
 
         // Example 1: Employee with custom mappings
-        Console.WriteLine("EXAMPLE 1: EMPLOYEE CUSTOM MAPPING\n");
+        Console.WriteLine("Example 1: Employee custom mapping\n");
 
         var employee = new Employee
         {
@@ -69,7 +69,7 @@ public class Program
         Console.WriteLine("Custom Mappings:    FullName (concatenated), YearsOfService (calculated), SalaryFormatted (formatted)\n");
 
         // Example 2: Product with computed properties
-        Console.WriteLine("EXAMPLE 2: PRODUCT CUSTOM MAPPING WITH DISCOUNT\n");
+        Console.WriteLine("Example 2: Product custom mapping with discount\n");
 
         var product = new Product
         {
@@ -90,7 +90,7 @@ public class Program
         Console.WriteLine("Custom Mappings:    DiscountedPrice (calculated), AvailabilityStatus (computed)\n");
 
         // Example 3: Out of stock product
-        Console.WriteLine("EXAMPLE 3: OUT OF STOCK PRODUCT MAPPING\n");
+        Console.WriteLine("Example 3: Out of stock product mapping\n");
 
         var outOfStock = new Product
         {
