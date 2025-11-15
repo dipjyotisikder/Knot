@@ -6,39 +6,30 @@ using System.Reflection;
 namespace Knot.Utilities
 {
     /// <summary>
-    /// Provides compiled expression caching for high-performance property access and object creation.
+    /// Caches compiled expressions for fast property access and object creation.
     /// </summary>
     internal static class CompiledExpressionCache
     {
-        // Cache for object factory functions
         private static readonly ConcurrentDictionary<Type, Func<object>> _factoryCache
             = new ConcurrentDictionary<Type, Func<object>>();
 
-        // Cache for property getters
         private static readonly ConcurrentDictionary<PropertyInfo, Func<object, object>> _getterCache
         = new ConcurrentDictionary<PropertyInfo, Func<object, object>>();
 
-        // Cache for property setters
         private static readonly ConcurrentDictionary<PropertyInfo, Action<object, object>> _setterCache
         = new ConcurrentDictionary<PropertyInfo, Action<object, object>>();
 
         /// <summary>
-        /// Gets or creates a compiled factory function for the specified type.
-        /// This is 10-20x faster than Activator.CreateInstance.
+        /// Gets or creates a compiled factory for the given type (10-20x faster than Activator.CreateInstance).
         /// </summary>
-        /// <param name="type">The type to create.</param>
-        /// <returns>A compiled factory function.</returns>
         public static Func<object> GetOrCreateFactory(Type type)
         {
             return _factoryCache.GetOrAdd(type, CreateFactory);
         }
 
         /// <summary>
-        /// Gets or creates a compiled getter function for the specified property.
-        /// This is 20-50x faster than PropertyInfo.GetValue.
+        /// Gets or creates a compiled getter for the property (20-50x faster than PropertyInfo.GetValue).
         /// </summary>
-        /// <param name="property">The property to create a getter for.</param>
-        /// <returns>A compiled getter function.</returns>
         public static Func<object, object>? GetOrCreateGetter(PropertyInfo property)
         {
             if (property == null || !property.CanRead)
@@ -50,11 +41,8 @@ namespace Knot.Utilities
         }
 
         /// <summary>
-        /// Gets or creates a compiled setter function for the specified property.
-        /// This is 20-50x faster than PropertyInfo.SetValue.
+        /// Gets or creates a compiled setter for the property (20-50x faster than PropertyInfo.SetValue).
         /// </summary>
-        /// <param name="property">The property to create a setter for.</param>
-        /// <returns>A compiled setter function.</returns>
         public static Action<object, object>? GetOrCreateSetter(PropertyInfo property)
         {
             if (property == null || !property.CanWrite)
@@ -65,14 +53,10 @@ namespace Knot.Utilities
             return _setterCache.GetOrAdd(property, CreateSetter);
         }
 
-        /// <summary>
-        /// Creates a compiled factory expression for the specified type.
-        /// </summary>
         private static Func<object> CreateFactory(Type type)
         {
             try
             {
-                // Expression: () => new T()
                 var newExpression = Expression.New(type);
                 var lambda = Expression.Lambda<Func<object>>(
                       Expression.Convert(newExpression, typeof(object)));
@@ -81,19 +65,14 @@ namespace Knot.Utilities
             }
             catch
             {
-                // Fallback to Activator.CreateInstance if expression compilation fails
                 return () => Activator.CreateInstance(type);
             }
         }
 
-        /// <summary>
-        /// Creates a compiled getter expression for the specified property.
-        /// </summary>
         private static Func<object, object> CreateGetter(PropertyInfo property)
         {
             try
             {
-                // Expression: (object obj) => (object)((TDeclaringType)obj).Property
                 var objParam = Expression.Parameter(typeof(object), "obj");
                 var castObj = Expression.Convert(objParam, property.DeclaringType);
                 var propertyAccess = Expression.Property(castObj, property);
@@ -104,19 +83,14 @@ namespace Knot.Utilities
             }
             catch
             {
-                // Fallback to reflection if expression compilation fails
                 return obj => property.GetValue(obj);
             }
         }
 
-        /// <summary>
-        /// Creates a compiled setter expression for the specified property.
-        /// </summary>
         private static Action<object, object> CreateSetter(PropertyInfo property)
         {
             try
             {
-                // Expression: (object obj, object value) => ((TDeclaringType)obj).Property = (TProperty)value
                 var objParam = Expression.Parameter(typeof(object), "obj");
                 var valueParam = Expression.Parameter(typeof(object), "value");
 
@@ -131,13 +105,12 @@ namespace Knot.Utilities
             }
             catch
             {
-                // Fallback to reflection if expression compilation fails
                 return (obj, value) => property.SetValue(obj, value);
             }
         }
 
         /// <summary>
-        /// Clears all cached compiled expressions. Useful for testing or memory management.
+        /// Clears all cached expressions (useful for testing).
         /// </summary>
         public static void ClearCache()
         {
@@ -147,7 +120,7 @@ namespace Knot.Utilities
         }
 
         /// <summary>
-        /// Gets the current cache statistics.
+        /// Gets current cache statistics.
         /// </summary>
         public static CacheStatistics GetStatistics()
         {
@@ -160,7 +133,7 @@ namespace Knot.Utilities
         }
 
         /// <summary>
-        /// Statistics about the compiled expression cache.
+        /// Cache statistics.
         /// </summary>
         public struct CacheStatistics
         {

@@ -4,19 +4,17 @@ using Knot.Mapping;
 namespace Knot
 {
     /// <summary>
-    /// Defines the contract for the mapping engine that executes the mapping operations.
+    /// Internal contract for the mapping engine.
     /// </summary>
     internal interface IMappingEngine
     {
         /// <summary>
-        /// Executes a mapping operation using the provided mapping context.
+        /// Executes a mapping operation.
         /// </summary>
-        /// <param name="context">The mapping context containing source and destination information.</param>
-        /// <returns>The mapped destination object.</returns>
         object Execute(MappingContext context);
 
         /// <summary>
-        /// Gets the mapping registry containing all registered type mappings.
+        /// Gets the registry with all type mappings.
         /// </summary>
         MappingRegistry Registry { get; }
     }

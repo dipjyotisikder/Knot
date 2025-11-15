@@ -1,6 +1,6 @@
+using System.Diagnostics;
 using Knot.Configuration;
 using Knot.Utilities;
-using System.Diagnostics;
 
 namespace Knot.Benchmarks
 {

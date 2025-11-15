@@ -3,34 +3,28 @@ using System;
 namespace Knot.Configuration
 {
     /// <summary>
-    /// Base class for custom type converters.
+    /// Generic base class for typed converters.
     /// </summary>
-    /// <typeparam name="TSource">The source type.</typeparam>
-    /// <typeparam name="TDestination">The destination type.</typeparam>
     public abstract class TypeConverter<TSource, TDestination> : TypeConverter
     {
         /// <summary>
-        /// Gets the source type.
+        /// Source type for this converter.
         /// </summary>
         public override Type SourceType => typeof(TSource);
 
         /// <summary>
-        /// Gets the destination type.
+        /// Destination type for this converter.
         /// </summary>
         public override Type DestinationType => typeof(TDestination);
 
         /// <summary>
-        /// Converts the source value to the destination type.
+        /// Converts a source value to the destination type.
         /// </summary>
-        /// <param name="source">The source value.</param>
-        /// <returns>The converted destination value.</returns>
         public abstract TDestination Convert(TSource source);
 
         /// <summary>
-        /// Converts the source value to the destination type.
+        /// Converts a source value to the destination type (untyped).
         /// </summary>
-        /// <param name="source">The source value.</param>
-        /// <returns>The converted destination value.</returns>
         public override object? Convert(object source)
         {
             if (source == null)
@@ -48,7 +42,7 @@ namespace Knot.Configuration
     }
 
     /// <summary>
-    /// Abstract base class for type converters.
+    /// Base class for custom type converters.
     /// </summary>
     public abstract class TypeConverter
     {
@@ -63,10 +57,8 @@ namespace Knot.Configuration
         public abstract Type DestinationType { get; }
 
         /// <summary>
-        /// Converts the source value to the destination type.
+        /// Converts a source value to the destination type.
         /// </summary>
-        /// <param name="source">The source value.</param>
-        /// <returns>The converted destination value.</returns>
         public abstract object? Convert(object source);
     }
 }

@@ -6,28 +6,27 @@ using Knot.Mapping;
 namespace Knot
 {
     /// <summary>
-    /// The main mapping engine implementation.
+    /// Core mapping engine that executes object transformations.
     /// </summary>
     public class MapperEngine : IMapper, IMappingEngine
     {
         private readonly MappingRegistry _registry;
 
         /// <summary>
-        /// Initializes a new instance of the MapperEngine class.
+        /// Creates a new mapping engine with the given registry.
         /// </summary>
-        /// <param name="registry">The mapping registry to use.</param>
         internal MapperEngine(MappingRegistry registry)
         {
             _registry = registry ?? throw new ArgumentNullException(nameof(registry));
         }
 
         /// <summary>
-        /// Gets the mapping registry containing all registered type mappings.
+        /// Gets the mapping registry with all type mappings.
         /// </summary>
         MappingRegistry IMappingEngine.Registry => _registry;
 
         /// <summary>
-        /// Maps the source object to a new destination object.
+        /// Maps source to a new destination instance.
         /// </summary>
         public TDestination Map<TDestination>(object source)
         {
@@ -44,7 +43,7 @@ namespace Knot
         }
 
         /// <summary>
-        /// Maps the source object to a new destination object.
+        /// Maps source to a new destination with explicit types.
         /// </summary>
         public TDestination Map<TSource, TDestination>(TSource source)
         {
@@ -58,7 +57,7 @@ namespace Knot
         }
 
         /// <summary>
-        /// Maps the source object to an existing destination object.
+        /// Maps source to an existing destination instance.
         /// </summary>
         public TDestination Map<TSource, TDestination>(TSource source, TDestination destination)
         {
@@ -77,7 +76,7 @@ namespace Knot
         }
 
         /// <summary>
-        /// Executes a mapping operation using the provided mapping context.
+        /// Executes the mapping operation with the given context.
         /// </summary>
         object IMappingEngine.Execute(MappingContext context)
         {
