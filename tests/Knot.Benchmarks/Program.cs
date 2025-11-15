@@ -6,18 +6,17 @@ namespace Knot.Benchmarks
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("=== Knot Performance Benchmarks ===");
-            Console.WriteLine();
+            Console.WriteLine("Knot Performance Benchmarks");
+
             Console.WriteLine("Select benchmark to run:");
-            Console.WriteLine("0. Quick Performance Test (Fast verification)");
-            Console.WriteLine("1. Simple Mapping Benchmarks");
-            Console.WriteLine("2. Collection Mapping Benchmarks");
-            Console.WriteLine("3. Complex Mapping Benchmarks");
-            Console.WriteLine("4. Configuration Benchmarks");
-            Console.WriteLine("5. Memory Allocation Benchmarks");
-            Console.WriteLine("6. Run ALL Benchmarks");
+            Console.WriteLine("0. Quick Performance Test (fast check)");
+            Console.WriteLine("1. Simple mapping benchmarks");
+            Console.WriteLine("2. Collection mapping benchmarks");
+            Console.WriteLine("3. Complex mapping benchmarks");
+            Console.WriteLine("4. Configuration benchmarks");
+            Console.WriteLine("5. Memory allocation benchmarks");
+            Console.WriteLine("6. Run all benchmarks");
             Console.WriteLine("9. Exit");
-            Console.WriteLine();
 
             if (args.Length == 0)
             {
@@ -50,7 +49,7 @@ namespace Knot.Benchmarks
                     case "9":
                         return;
                     default:
-                        Console.WriteLine("Invalid choice. Running quick test...");
+                        Console.WriteLine("Invalid choice; running quick test.");
                         QuickPerformanceTest.RunQuickTest();
                         break;
                 }
@@ -63,7 +62,7 @@ namespace Knot.Benchmarks
 
         static void RunAllBenchmarks()
         {
-            Console.WriteLine("\n=== Running All Benchmarks ===\n");
+            Console.WriteLine("Running all benchmarks...");
 
             BenchmarkRunner.Run<SimpleMappingBenchmarks>();
             BenchmarkRunner.Run<CollectionMappingBenchmarks>();
