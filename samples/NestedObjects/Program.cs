@@ -9,14 +9,11 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        Console.WriteLine("========================================================");
-        Console.WriteLine("   KNOT COMPREHENSIVE NESTED OBJECTS MAPPING TESTS");
-        Console.WriteLine("========================================================\n");
+        Console.WriteLine("Knot Comprehensive Nested Objects Mapping Tests\n");
 
         RunAllTests();
 
-        Console.WriteLine("\n========================================================");
-        Console.WriteLine("Press any key to exit...");
+        Console.WriteLine("\nPress any key to exit...");
         Console.ReadKey();
     }
 
@@ -37,8 +34,7 @@ public class Program
 
     private static void Test1_BasicNestedObjectMapping()
     {
-        Console.WriteLine("TEST 1: Basic Nested Object Mapping");
-        Console.WriteLine("------------------------------------------------------------");
+        Console.WriteLine("Test 1: Basic nested object mapping\n");
 
         var config = new MapperConfiguration(cfg =>
         {
@@ -72,8 +68,7 @@ public class Program
 
     private static void Test2_DeepNestedHierarchy()
     {
-        Console.WriteLine("TEST 2: Deep Nested Hierarchy (3+ levels)");
-        Console.WriteLine("------------------------------------------------------------");
+        Console.WriteLine("Test 2: Deep nested hierarchy (3+ levels)\n");
 
         var config = new MapperConfiguration(cfg =>
         {
@@ -125,8 +120,7 @@ public class Program
 
     private static void Test3_CollectionMapping()
     {
-        Console.WriteLine("TEST 3: Collection Mapping (List<T>)");
-        Console.WriteLine("------------------------------------------------------------");
+        Console.WriteLine("Test 3: Collection mapping (List<T>)\n");
 
         var config = new MapperConfiguration(cfg =>
         {
@@ -160,8 +154,7 @@ public class Program
 
     private static void Test4_ArrayMapping()
     {
-        Console.WriteLine("TEST 4: Array Mapping");
-        Console.WriteLine("------------------------------------------------------------");
+        Console.WriteLine("Test 4: Array mapping\n");
 
         var config = new MapperConfiguration(cfg =>
         {
@@ -193,8 +186,7 @@ public class Program
 
     private static void Test5_NullHandling()
     {
-        Console.WriteLine("TEST 5: Null Object Handling");
-        Console.WriteLine("------------------------------------------------------------");
+        Console.WriteLine("Test 5: Null object handling\n");
 
         var config = new MapperConfiguration(cfg =>
         {
@@ -254,8 +246,7 @@ public class Program
 
     private static void Test6_EmptyCollections()
     {
-        Console.WriteLine("TEST 6: Empty Collection Mapping");
-        Console.WriteLine("------------------------------------------------------------");
+        Console.WriteLine("Test 6: Empty collection mapping\n");
 
         var config = new MapperConfiguration(cfg =>
         {
@@ -284,8 +275,7 @@ public class Program
 
     private static void Test7_BidirectionalMapping()
     {
-        Console.WriteLine("TEST 7: Bidirectional Mapping");
-        Console.WriteLine("------------------------------------------------------------");
+        Console.WriteLine("Test 7: Bidirectional mapping\n");
 
         var config = new MapperConfiguration(cfg =>
         {
@@ -317,8 +307,7 @@ public class Program
 
     private static void Test8_MixedCollectionTypes()
     {
-        Console.WriteLine("TEST 8: Mixed Collection Types (IEnumerable, List, Array)");
-        Console.WriteLine("------------------------------------------------------------");
+        Console.WriteLine("Test 8: Mixed collection types (IEnumerable, List, Array)\n");
 
         var config = new MapperConfiguration(cfg =>
         {
@@ -349,8 +338,7 @@ public class Program
 
     private static void Test9_CircularReferencePrevention()
     {
-        Console.WriteLine("TEST 9: Circular Reference Prevention");
-        Console.WriteLine("------------------------------------------------------------");
+        Console.WriteLine("Test 9: Circular reference prevention\n");
 
         // Note: This tests that we don't have infinite loops with proper object construction
         var config = new MapperConfiguration(cfg =>
@@ -389,8 +377,7 @@ public class Program
 
     private static void Test10_PerformanceWithLargeDataset()
     {
-        Console.WriteLine("TEST 10: Performance with Large Dataset");
-        Console.WriteLine("------------------------------------------------------------");
+        Console.WriteLine("Test 10: Performance with large dataset\n");
 
         var config = new MapperConfiguration(cfg =>
         {
@@ -451,8 +438,7 @@ public class Program
 
     private static void Test11_TenLevelDeepHierarchy()
     {
-        Console.WriteLine("TEST 11: 10-Level Deep Nested Hierarchy");
-        Console.WriteLine("------------------------------------------------------------");
+        Console.WriteLine("Test 11: 10-level deep nested hierarchy\n");
 
         var config = new MapperConfiguration(cfg =>
         {
@@ -554,9 +540,7 @@ public class Program
     }
 }
 
-// ============================================================================
 // DOMAIN MODELS
-// ============================================================================
 
 public class Company
 {

@@ -4,7 +4,7 @@ using Knot.Configuration;
 namespace Knot
 {
     /// <summary>
-    /// Static mapper class for global configuration and mapping.
+    /// Global static mapper for application-wide mapping.
     /// </summary>
     public static class Mapper
     {
@@ -12,9 +12,8 @@ namespace Knot
         private static readonly object _lock = new object();
 
         /// <summary>
-        /// Initializes the global mapper with the specified configuration.
+        /// Initializes the global mapper with a configuration action.
         /// </summary>
-        /// <param name="configAction">Action to configure mappings.</param>
         public static void Initialize(Action<MapperConfiguration> configAction)
         {
             if (configAction == null)
@@ -30,9 +29,8 @@ namespace Knot
         }
 
         /// <summary>
-        /// Initializes the global mapper with a mapper configuration.
+        /// Initializes the global mapper with an existing configuration.
         /// </summary>
-        /// <param name="configuration">The mapper configuration.</param>
         public static void Initialize(MapperConfiguration configuration)
         {
             if (configuration == null)
@@ -47,11 +45,8 @@ namespace Knot
         }
 
         /// <summary>
-        /// Maps the source object to a new destination object.
+        /// Maps source to a new destination object.
         /// </summary>
-        /// <typeparam name="TDestination">The destination type.</typeparam>
-        /// <param name="source">The source object.</param>
-        /// <returns>A new instance of the destination type.</returns>
         public static TDestination Map<TDestination>(object source)
         {
             EnsureInitialized();
@@ -59,12 +54,8 @@ namespace Knot
         }
 
         /// <summary>
-        /// Maps the source object to a new destination object.
+        /// Maps source to a new destination object with explicit types.
         /// </summary>
-        /// <typeparam name="TSource">The source type.</typeparam>
-        /// <typeparam name="TDestination">The destination type.</typeparam>
-        /// <param name="source">The source object.</param>
-        /// <returns>A new instance of the destination type.</returns>
         public static TDestination Map<TSource, TDestination>(TSource source)
         {
             EnsureInitialized();
@@ -72,13 +63,8 @@ namespace Knot
         }
 
         /// <summary>
-        /// Maps the source object to an existing destination object.
+        /// Maps source to an existing destination object.
         /// </summary>
-        /// <typeparam name="TSource">The source type.</typeparam>
-        /// <typeparam name="TDestination">The destination type.</typeparam>
-        /// <param name="source">The source object.</param>
-        /// <param name="destination">The destination object.</param>
-        /// <returns>The destination object with mapped values.</returns>
         public static TDestination Map<TSource, TDestination>(TSource source, TDestination destination)
         {
             EnsureInitialized();

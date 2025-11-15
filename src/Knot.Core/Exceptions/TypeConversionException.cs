@@ -3,56 +3,49 @@ using System;
 namespace Knot.Exceptions
 {
     /// <summary>
-    /// Exception thrown when a type conversion fails during mapping.
+    /// Thrown when type conversion fails during mapping.
     /// </summary>
     public class TypeConversionException : MappingException
     {
         /// <summary>
-        /// Gets the source type.
+        /// The source type that failed to convert.
         /// </summary>
         public Type? SourceType { get; }
 
         /// <summary>
-        /// Gets the destination type.
+        /// The destination type that was expected.
         /// </summary>
         public Type? DestinationType { get; }
 
         /// <summary>
-        /// Gets the value that failed to convert.
+        /// The value that failed conversion.
         /// </summary>
         public object? Value { get; }
 
         /// <summary>
-        /// Initializes a new instance of the TypeConversionException class.
+        /// Creates a new type conversion exception.
         /// </summary>
         public TypeConversionException()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the TypeConversionException class with a specified error message.
+        /// Creates a new type conversion exception with a message.
         /// </summary>
-        /// <param name="message">The message that describes the error.</param>
         public TypeConversionException(string message) : base(message)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the TypeConversionException class with a specified error message
-        /// and a reference to the inner exception that is the cause of this exception.
+        /// Creates a new type conversion exception with a message and inner exception.
         /// </summary>
-        /// <param name="message">The error message that explains the reason for the exception.</param>
-        /// <param name="innerException">The exception that is the cause of the current exception.</param>
         public TypeConversionException(string message, Exception innerException) : base(message, innerException)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the TypeConversionException class with type information.
+        /// Creates a new type conversion exception with type details.
         /// </summary>
-        /// <param name="sourceType">The source type.</param>
-        /// <param name="destinationType">The destination type.</param>
-        /// <param name="value">The value that failed to convert.</param>
         public TypeConversionException(Type sourceType, Type destinationType, object value)
           : base($"Failed to convert value of type '{sourceType?.Name}' to type '{destinationType?.Name}'.")
         {
@@ -62,12 +55,8 @@ namespace Knot.Exceptions
         }
 
         /// <summary>
-        /// Initializes a new instance of the TypeConversionException class with type information and inner exception.
+        /// Creates a new type conversion exception with type details and inner exception.
         /// </summary>
-        /// <param name="sourceType">The source type.</param>
-        /// <param name="destinationType">The destination type.</param>
-        /// <param name="value">The value that failed to convert.</param>
-        /// <param name="innerException">The exception that is the cause of the current exception.</param>
         public TypeConversionException(Type sourceType, Type destinationType, object value, Exception innerException)
       : base($"Failed to convert value of type '{sourceType?.Name}' to type '{destinationType?.Name}'.", innerException)
         {

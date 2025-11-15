@@ -1,6 +1,6 @@
+using System.Diagnostics;
 using Knot.Configuration;
 using Knot.Utilities;
-using System.Diagnostics;
 
 namespace Knot.Benchmarks
 {
@@ -29,7 +29,7 @@ namespace Knot.Benchmarks
 
         public static void RunQuickTest()
         {
-            Console.WriteLine("=== Knot Performance Optimizations - Quick Test ===\n");
+            Console.WriteLine("Knot Performance Quick Test\n");
 
             // Setup
             var config = new MapperConfiguration(cfg =>
@@ -55,8 +55,7 @@ namespace Knot.Benchmarks
             }
 
             // Test 1: Single mapping performance
-            Console.WriteLine("Test 1: Single Object Mapping");
-            Console.WriteLine("?????????????????????????????????????");
+            Console.WriteLine("Test 1: Single object mapping");
 
             var sw = Stopwatch.StartNew();
             for (int i = 0; i < 10000; i++)
@@ -71,22 +70,21 @@ namespace Knot.Benchmarks
 
             if (avgTime < 500)
             {
-                Console.WriteLine("? EXCELLENT: < 500ns (30-50x faster than before!)");
+                Console.WriteLine("Excellent: < 500 ns");
             }
             else if (avgTime < 1500)
             {
-                Console.WriteLine("? GOOD: 500-1500ns (10-30x faster)");
+                Console.WriteLine("Good: 500-1500 ns");
             }
             else
             {
-                Console.WriteLine("??  BASELINE: > 1500ns (pre-optimization performance)");
+                Console.WriteLine("Baseline: > 1500 ns");
             }
 
             Console.WriteLine();
 
             // Test 2: Batch mapping
-            Console.WriteLine("Test 2: Batch Mapping (10,000 objects)");
-            Console.WriteLine("?????????????????????????????????????");
+            Console.WriteLine("Test 2: Batch mapping (10,000 objects)");
 
             sw.Restart();
             for (int i = 0; i < 10000; i++)
@@ -100,35 +98,33 @@ namespace Knot.Benchmarks
 
             if (sw.Elapsed.TotalMilliseconds < 5)
             {
-                Console.WriteLine("? EXCELLENT: < 5ms for 10K mappings");
+                Console.WriteLine("Excellent: < 5 ms for 10K");
             }
             else if (sw.Elapsed.TotalMilliseconds < 20)
             {
-                Console.WriteLine("? GOOD: 5-20ms for 10K mappings");
+                Console.WriteLine("Good: 5-20 ms for 10K");
             }
             else
             {
-                Console.WriteLine("??  BASELINE: > 20ms for 10K mappings");
+                Console.WriteLine("Baseline: > 20 ms for 10K");
             }
 
             Console.WriteLine();
 
             // Test 3: Cache statistics
-            Console.WriteLine("Test 3: Compiled Expression Cache Statistics");
-            Console.WriteLine("?????????????????????????????????????");
+            Console.WriteLine("Test 3: Compiled expression cache statistics");
 
             var stats = CompiledExpressionCache.GetStatistics();
             Console.WriteLine($"Factory cache size: {stats.FactoryCacheSize} types");
             Console.WriteLine($"Getter cache size: {stats.GetterCacheSize} properties");
             Console.WriteLine($"Setter cache size: {stats.SetterCacheSize} properties");
             Console.WriteLine($"Total cached expressions: {stats.TotalCacheSize}");
-            Console.WriteLine("? Expressions compiled and cached for reuse");
+            Console.WriteLine("Expressions compiled and cached for reuse");
 
             Console.WriteLine();
 
             // Test 4: Manual mapping comparison
-            Console.WriteLine("Test 4: Manual Mapping Comparison (Baseline)");
-            Console.WriteLine("?????????????????????????????????????");
+            Console.WriteLine("Test 4: Manual mapping comparison (baseline)");
 
             sw.Restart();
             for (int i = 0; i < 10000; i++)
@@ -146,29 +142,29 @@ namespace Knot.Benchmarks
 
             var manualAvg = sw.Elapsed.TotalMilliseconds / 10000 * 1000000;
             Console.WriteLine($"Average time per manual mapping: {manualAvg:F0} ns");
-            Console.WriteLine($"Knot mapper overhead: {avgTime / manualAvg:F1}x slower than manual");
+            Console.WriteLine($"Mapper overhead: {avgTime / manualAvg:F1}x slower than manual");
 
             if (avgTime / manualAvg < 3)
             {
-                Console.WriteLine("? EXCELLENT: Within 3x of manual mapping!");
+                Console.WriteLine("Excellent: Within 3x of manual mapping");
             }
             else if (avgTime / manualAvg < 5)
             {
-                Console.WriteLine("? GOOD: Within 5x of manual mapping");
+                Console.WriteLine("Good: Within 5x of manual mapping");
             }
             else
             {
-                Console.WriteLine("??  NEEDS OPTIMIZATION: > 5x slower than manual");
+                Console.WriteLine("Needs optimization: > 5x slower than manual");
             }
 
             Console.WriteLine();
-            Console.WriteLine("=== Test Complete ===");
+            Console.WriteLine("Test complete");
             Console.WriteLine();
-            Console.WriteLine("Expected Results with Optimizations:");
-            Console.WriteLine("  • Mapping time: 150-300 ns per object");
-            Console.WriteLine("  • Throughput: 3-6 million mappings/sec");
-            Console.WriteLine("  • Overhead: 2-3x slower than manual mapping");
-            Console.WriteLine("  • Improvement: 30-50x faster than pre-optimization");
+            Console.WriteLine("Expected results with optimizations:");
+            Console.WriteLine("  - Mapping time: ~150-300 ns per object");
+            Console.WriteLine("  - Throughput: ~3-6 million mappings/sec");
+            Console.WriteLine("  - Overhead: ~2-3x slower than manual mapping");
+            Console.WriteLine("  - Improvement: significant vs pre-optimization");
         }
     }
 }

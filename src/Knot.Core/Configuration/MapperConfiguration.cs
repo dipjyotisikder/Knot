@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Knot.Configuration
 {
     /// <summary>
-    /// Configuration class for setting up mappings.
+    /// Configures object mappings for the mapper.
     /// </summary>
     public class MapperConfiguration
     {
@@ -12,9 +12,8 @@ namespace Knot.Configuration
         private readonly List<Profile> _profiles;
 
         /// <summary>
-        /// Initializes a new instance of the MapperConfiguration class.
+        /// Creates a new mapper configuration with the given setup action.
         /// </summary>
-        /// <param name="configAction">Action to configure mappings.</param>
         public MapperConfiguration(Action<MapperConfiguration> configAction)
         {
             _registry = new MappingRegistry();
@@ -23,11 +22,8 @@ namespace Knot.Configuration
         }
 
         /// <summary>
-        /// Creates a mapping between two types.
+        /// Defines a mapping from source to destination type.
         /// </summary>
-        /// <typeparam name="TSource">The source type.</typeparam>
-        /// <typeparam name="TDestination">The destination type.</typeparam>
-        /// <returns>Fluent configuration for the type mapping.</returns>
         public TypeMapConfiguration<TSource, TDestination> CreateMap<TSource, TDestination>()
         {
             var typeMap = _registry.CreateMap<TSource, TDestination>();
@@ -35,12 +31,8 @@ namespace Knot.Configuration
         }
 
         /// <summary>
-        /// Creates a mapping between two types with configuration.
+        /// Defines a mapping with custom configuration.
         /// </summary>
-        /// <typeparam name="TSource">The source type.</typeparam>
-        /// <typeparam name="TDestination">The destination type.</typeparam>
-        /// <param name="configure">Action to configure the mapping.</param>
-        /// <returns>Fluent configuration for the type mapping.</returns>
         public TypeMapConfiguration<TSource, TDestination> CreateMap<TSource, TDestination>(
           Action<TypeMapConfiguration<TSource, TDestination>> configure)
         {
@@ -53,7 +45,6 @@ namespace Knot.Configuration
         /// <summary>
         /// Creates a mapper instance from this configuration.
         /// </summary>
-        /// <returns>A new IMapper instance.</returns>
         public IMapper CreateMapper()
         {
             return new MapperEngine(_registry);
@@ -62,7 +53,6 @@ namespace Knot.Configuration
         /// <summary>
         /// Registers a type converter.
         /// </summary>
-        /// <typeparam name="TConverter">The type converter type.</typeparam>
         public void AddConverter<TConverter>() where TConverter : TypeConverter, new()
         {
             var converter = new TConverter();
@@ -72,16 +62,14 @@ namespace Knot.Configuration
         /// <summary>
         /// Registers a type converter instance.
         /// </summary>
-        /// <param name="converter">The type converter instance.</param>
         public void AddConverter(TypeConverter converter)
         {
             _registry.RegisterConverter(converter);
         }
 
         /// <summary>
-        /// Adds a profile to the configuration.
+        /// Adds a mapping profile to the configuration.
         /// </summary>
-        /// <typeparam name="TProfile">The profile type.</typeparam>
         public void AddProfile<TProfile>() where TProfile : Profile, new()
         {
             var profile = new TProfile();
@@ -89,9 +77,8 @@ namespace Knot.Configuration
         }
 
         /// <summary>
-        /// Adds a profile instance to the configuration.
+        /// Adds a mapping profile instance.
         /// </summary>
-        /// <param name="profile">The profile instance.</param>
         public void AddProfile(Profile profile)
         {
             if (profile == null)
@@ -105,9 +92,8 @@ namespace Knot.Configuration
         }
 
         /// <summary>
-        /// Adds profiles from the specified assembly.
+        /// Scans an assembly and registers all Profile classes found.
         /// </summary>
-        /// <param name="assembly">The assembly to scan for profiles.</param>
         public void AddProfiles(System.Reflection.Assembly assembly)
         {
             if (assembly == null)

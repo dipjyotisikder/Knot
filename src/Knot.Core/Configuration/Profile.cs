@@ -3,28 +3,25 @@ using System;
 namespace Knot.Configuration
 {
     /// <summary>
-    /// Base class for organizing mapping configurations.
+    /// Base class for organizing related mappings.
     /// </summary>
     public abstract class Profile
     {
         private MapperConfiguration _configuration = null!;
 
         /// <summary>
-        /// Gets the profile name.
+        /// Gets the profile name (defaults to class name).
         /// </summary>
         public virtual string ProfileName => GetType().Name;
 
         /// <summary>
-        /// Configures the mappings for this profile.
+        /// Override to define mappings for this profile.
         /// </summary>
         protected internal abstract void Configure();
 
         /// <summary>
-        /// Creates a mapping between two types.
+        /// Defines a mapping from source to destination type.
         /// </summary>
-        /// <typeparam name="TSource">The source type.</typeparam>
-        /// <typeparam name="TDestination">The destination type.</typeparam>
-        /// <returns>Fluent configuration for the type mapping.</returns>
         protected TypeMapConfiguration<TSource, TDestination> CreateMap<TSource, TDestination>()
         {
             EnsureConfigurationSet();
@@ -32,12 +29,8 @@ namespace Knot.Configuration
         }
 
         /// <summary>
-        /// Creates a mapping between two types with configuration.
+        /// Defines a mapping with custom configuration.
         /// </summary>
-        /// <typeparam name="TSource">The source type.</typeparam>
-        /// <typeparam name="TDestination">The destination type.</typeparam>
-        /// <param name="configure">Action to configure the mapping.</param>
-        /// <returns>Fluent configuration for the type mapping.</returns>
         protected TypeMapConfiguration<TSource, TDestination> CreateMap<TSource, TDestination>(Action<TypeMapConfiguration<TSource, TDestination>> configure)
         {
             EnsureConfigurationSet();
@@ -47,7 +40,6 @@ namespace Knot.Configuration
         /// <summary>
         /// Registers a type converter.
         /// </summary>
-        /// <typeparam name="TConverter">The type converter type.</typeparam>
         protected void AddConverter<TConverter>() where TConverter : TypeConverter, new()
         {
             EnsureConfigurationSet();
@@ -57,7 +49,6 @@ namespace Knot.Configuration
         /// <summary>
         /// Registers a type converter instance.
         /// </summary>
-        /// <param name="converter">The type converter instance.</param>
         protected void AddConverter(TypeConverter converter)
         {
             EnsureConfigurationSet();
@@ -65,9 +56,8 @@ namespace Knot.Configuration
         }
 
         /// <summary>
-        /// Sets the mapper configuration for this profile.
+        /// Associates this profile with a mapper configuration (internal use).
         /// </summary>
-        /// <param name="configuration">The mapper configuration.</param>
         internal void SetConfiguration(MapperConfiguration configuration)
         {
             _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
