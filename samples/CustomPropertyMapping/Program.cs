@@ -7,9 +7,7 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        Console.WriteLine("================================================");
-        Console.WriteLine("   KNOT CUSTOM PROPERTY MAPPING EXAMPLE");
-        Console.WriteLine("================================================\n");
+        Console.WriteLine("KNOT CUSTOM PROPERTY MAPPING EXAMPLE\n");
 
         // Configure mapper with custom property mappings
         var config = new MapperConfiguration(cfg =>
@@ -47,8 +45,7 @@ public class Program
         var mapper = config.CreateMapper();
 
         // Example 1: Employee with custom mappings
-        Console.WriteLine("EXAMPLE 1: EMPLOYEE CUSTOM MAPPING");
-        Console.WriteLine("-------------------------------------");
+        Console.WriteLine("EXAMPLE 1: EMPLOYEE CUSTOM MAPPING\n");
 
         var employee = new Employee
         {
@@ -72,8 +69,7 @@ public class Program
         Console.WriteLine("Custom Mappings:    FullName (concatenated), YearsOfService (calculated), SalaryFormatted (formatted)\n");
 
         // Example 2: Product with computed properties
-        Console.WriteLine("EXAMPLE 2: PRODUCT CUSTOM MAPPING WITH DISCOUNT");
-        Console.WriteLine("-------------------------------------");
+        Console.WriteLine("EXAMPLE 2: PRODUCT CUSTOM MAPPING WITH DISCOUNT\n");
 
         var product = new Product
         {
@@ -94,8 +90,7 @@ public class Program
         Console.WriteLine("Custom Mappings:    DiscountedPrice (calculated), AvailabilityStatus (computed)\n");
 
         // Example 3: Out of stock product
-        Console.WriteLine("EXAMPLE 3: OUT OF STOCK PRODUCT MAPPING");
-        Console.WriteLine("-------------------------------------");
+        Console.WriteLine("EXAMPLE 3: OUT OF STOCK PRODUCT MAPPING\n");
 
         var outOfStock = new Product
         {
@@ -114,7 +109,6 @@ public class Program
         Console.WriteLine($"Availability:       {outOfStockDto.AvailabilityStatus}");
         Console.WriteLine("Status:             No discount applied (not on sale)\n");
 
-        Console.WriteLine("================================================");
         Console.WriteLine("Press any key to exit...");
         Console.ReadKey();
     }

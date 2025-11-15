@@ -7,9 +7,7 @@ internal class Program
 {
     public static void Main(string[] args)
     {
-        Console.WriteLine("=====================================");
-        Console.WriteLine("   KNOT BASIC MAPPING EXAMPLE");
-        Console.WriteLine("=====================================\n");
+        Console.WriteLine("KNOT BASIC MAPPING EXAMPLE\n");
 
         // Step 1: Define your source and destination models
         // (See Models.cs)
@@ -25,8 +23,7 @@ internal class Program
         var mapper = config.CreateMapper();
 
         // Example 1: Simple Person mapping
-        Console.WriteLine("EXAMPLE 1: SIMPLE PERSON MAPPING");
-        Console.WriteLine("-------------------------------------");
+        Console.WriteLine("EXAMPLE 1: SIMPLE PERSON MAPPING\n");
 
         var person = new Person
         {
@@ -43,8 +40,7 @@ internal class Program
         Console.WriteLine("Status:         Mapping completed successfully\n");
 
         // Example 2: Employee mapping (with automatic ignoring)
-        Console.WriteLine("EXAMPLE 2: EMPLOYEE MAPPING");
-        Console.WriteLine("-------------------------------------");
+        Console.WriteLine("EXAMPLE 2: EMPLOYEE MAPPING\n");
 
         var employee = new Employee
         {
@@ -65,8 +61,7 @@ internal class Program
         Console.WriteLine("Note:           Salary property not mapped (not present in destination DTO)\n");
 
         // Example 3: Mapping to existing instance
-        Console.WriteLine("EXAMPLE 3: UPDATE EXISTING INSTANCE");
-        Console.WriteLine("-------------------------------------");
+        Console.WriteLine("EXAMPLE 3: UPDATE EXISTING INSTANCE\n");
 
         var existingPerson = new PersonDto
         {
@@ -83,7 +78,6 @@ internal class Program
         Console.WriteLine($"After Update:   {existingPerson.FirstName} {existingPerson.LastName}, Age: {existingPerson.Age}");
         Console.WriteLine("Status:         Existing instance updated successfully\n");
 
-        Console.WriteLine("=====================================");
         Console.WriteLine("Press any key to exit...");
         Console.ReadKey();
     }

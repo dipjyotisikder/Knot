@@ -10,9 +10,7 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        Console.WriteLine("================================================");
-        Console.WriteLine("   KNOT COLLECTION MAPPING EXAMPLE");
-        Console.WriteLine("================================================\n");
+        Console.WriteLine("KNOT COLLECTION MAPPING EXAMPLE\n");
 
         // Configure mappings
         var config = new MapperConfiguration(cfg =>
@@ -25,8 +23,7 @@ public class Program
         var mapper = config.CreateMapper();
 
         // Example 1: List Mapping
-        Console.WriteLine("EXAMPLE 1: LIST TO LIST MAPPING");
-        Console.WriteLine("-------------------------------------");
+        Console.WriteLine("EXAMPLE 1: LIST TO LIST MAPPING\n");
 
         var customers = new List<Customer>
         {
@@ -46,8 +43,7 @@ public class Program
         Console.WriteLine("Status:             All customers mapped successfully\n");
 
         // Example 2: Array Mapping
-        Console.WriteLine("EXAMPLE 2: LIST TO ARRAY MAPPING");
-        Console.WriteLine("-------------------------------------");
+        Console.WriteLine("EXAMPLE 2: LIST TO ARRAY MAPPING\n");
 
         var orders = new List<Order>
         {
@@ -67,8 +63,7 @@ public class Program
         Console.WriteLine("Status:             All orders mapped to array successfully\n");
 
         // Example 3: IEnumerable Mapping with LINQ
-        Console.WriteLine("EXAMPLE 3: FILTERED COLLECTION MAPPING");
-        Console.WriteLine("-------------------------------------");
+        Console.WriteLine("EXAMPLE 3: FILTERED COLLECTION MAPPING\n");
 
         var products = new List<Product>
         {
@@ -95,8 +90,7 @@ public class Program
         Console.WriteLine("Status:             Filtered and mapped successfully\n");
 
         // Example 4: Empty Collection Handling
-        Console.WriteLine("EXAMPLE 4: EMPTY COLLECTION HANDLING");
-        Console.WriteLine("-------------------------------------");
+        Console.WriteLine("EXAMPLE 4: EMPTY COLLECTION HANDLING\n");
 
         var emptyList = new List<Customer>();
         var emptyResult = emptyList.MapToList<Customer, CustomerDto>(mapper);
@@ -106,8 +100,7 @@ public class Program
         Console.WriteLine("Status:             Empty collections handled gracefully without errors\n");
 
         // Example 5: Large Collection Performance
-        Console.WriteLine("EXAMPLE 5: LARGE COLLECTION PERFORMANCE");
-        Console.WriteLine("-------------------------------------");
+        Console.WriteLine("EXAMPLE 5: LARGE COLLECTION PERFORMANCE\n");
 
         var largeCollection = Enumerable.Range(1, 10000)
             .Select(i => new Customer
@@ -129,7 +122,6 @@ public class Program
         Console.WriteLine($"Throughput:         {10000 / duration.TotalSeconds:F0} items/second");
         Console.WriteLine("Status:             Large collection mapped efficiently\n");
 
-        Console.WriteLine("================================================");
         Console.WriteLine("Press any key to exit...");
         Console.ReadKey();
     }
