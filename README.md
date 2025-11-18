@@ -599,14 +599,23 @@ public class UserMappingProfile : Profile
 
   // DTO to User (reverse mapping)
         CreateMap<UserDto, User>(map =>
-        {
-            map.Ignore(dest => dest.CreatedDate);
-      map.Ignore(dest => dest.ModifiedDate);
-        });
+  {
+    map.ForMember(dest => dest.FirstName, src =>
+            {
+                var parts = src.FullName?.Split(' ');
+ return parts?[0] ?? string.Empty;
+            });
 
-        // UserRole mappings
-        CreateMap<UserRole, UserRoleDto>();
-      CreateMap<UserRoleDto, UserRole>();
+      map.ForMember(dest => dest.LastName, src =>
+     {
+      var parts = src.FullName?.Split(' ');
+        return parts?.Length > 1 ? parts[1] : string.Empty;
+  });
+
+            // Ignore fields that shouldn't be updated
+ map.Ignore(dest => dest.HireDate);
+            map.Ignore(dest => dest.Salary);
+        });
     }
 }
 ```
@@ -1084,17 +1093,72 @@ All samples are located in the `samples/` directory and can be built together us
 
 **Features**:
 
--   Simple object-to-object mapping
--   Automatic property matching by convention
--   Basic mapper configuration
--   Mapping to existing instances
+- Simple object-to-object mapping
+- Automatic property matching by convention
+- Basic mapper configuration
+- Mapping to existing instances
+
+<details>
+<summary><strong>Show Example Code</strong></summary>
+
+```csharp
+// samples/BasicMapping/Program.cs
+using System;
+using Knot.Configuration;
+
+namespace Knot.Samples.BasicMapping;
+
+internal class Program
+{
+    public static void Main(string[] args)
+    {
+        Console.WriteLine("Knot Basic Mapping Example\n");
+
+        // 1. Define your models
+        public class Person
+        {
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
+            public int Age { get; set; }
+        }
+
+        public class PersonDto
+        {
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
+            public int Age { get; set; }
+        }
+
+        // 2. Configure the mapper (one-time setup)
+        var config = new MapperConfiguration(cfg =>
+        {
+            cfg.CreateMap<Person, PersonDto>();
+        });
+
+        // 3. Create the mapper instance
+        var mapper = config.CreateMapper();
+
+        // 4. Use it!
+        var person = new Person
+        {
+            FirstName = "John",
+            LastName = "Doe",
+            Age = 30
+        };
+
+        var personDto = mapper.Map<PersonDto>(person);
+        // personDto.FirstName == "John"
+        // personDto.LastName == "Doe"
+        // personDto.Age == 30
+
+        Console.WriteLine("Mapping successful!");
+    }
+}
+```
+
+</details>
 
 **Location**: `samples/BasicMapping/`
-
-```bash
-cd samples/BasicMapping
-dotnet run
-```
 
 #### 2. CustomPropertyMapping
 
@@ -1102,17 +1166,87 @@ dotnet run
 
 **Features**:
 
--   `ForMember` custom property mapping
--   Calculated and derived properties
--   Property ignoring with `Ignore`
--   Conditional property mapping
+- `ForMember` custom property mapping
+- Calculated and derived properties
+- Property ignoring with `Ignore`
+- Conditional property mapping
+
+<details>
+<summary><strong>Show Example Code</strong></summary>
+
+```csharp
+// samples/CustomPropertyMapping/Program.cs
+using System;
+using Knot.Configuration;
+
+namespace Knot.Samples.CustomPropertyMapping;
+
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        Console.WriteLine("Knot Custom Property Mapping Example\n");
+
+        // Define your models
+        public class Customer
+        {
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
+          public DateTime DateOfBirth { get; set; }
+            public string Email { get; set; }
+        }
+
+        public class CustomerDto
+        {
+            public string FullName { get; set; }
+            public int Age { get; set; }
+         public string ContactEmail { get; set; }
+        }
+
+        // Configure the mapping
+        var config = new MapperConfiguration(cfg =>
+        {
+            cfg.CreateMap<Customer, CustomerDto>(map =>
+          {
+                // Combine properties
+                map.ForMember(dest => dest.FullName,
+              src => $"{src.FirstName} {src.LastName}");
+
+                // Calculate age
+                map.ForMember(dest => dest.Age,
+                    src => DateTime.Now.Year - src.DateOfBirth.Year);
+
+          // Map from different property name
+          map.ForMember(dest => dest.ContactEmail,
+                src => src.Email);
+            });
+        });
+
+        // Create the mapper instance
+        var mapper = config.CreateMapper();
+
+        // Use it!
+        var customer = new Customer
+        {
+            FirstName = "Jane",
+            LastName = "Doe",
+            DateOfBirth = new DateTime(1990, 1, 1),
+            Email = "jane.doe@example.com"
+        };
+
+        var customerDto = mapper.Map<CustomerDto>(customer);
+        // customerDto.FullName == "Jane Doe"
+        // customerDto.Age == 33 (assuming current year is 2023)
+        // customerDto.ContactEmail == "jane.doe@example.com"
+
+        Console.WriteLine("Mapping successful!");
+    }
+}
+```
+
+</details>
 
 **Location**: `samples/CustomPropertyMapping/`
-
-```bash
-cd samples/CustomPropertyMapping
-dotnet run
-```
 
 #### 3. CollectionMapping
 
@@ -1120,17 +1254,61 @@ dotnet run
 
 **Features**:
 
--   List mapping with `MapToList`
--   Array mapping with `MapToArray`
--   IEnumerable mapping
--   Extension method usage
+- List mapping with `MapToList`
+- Array mapping with `MapToArray`
+- IEnumerable mapping
+- Extension method usage
+
+<details>
+<summary><strong>Show Example Code</strong></summary>
+
+```csharp
+// samples/CollectionMapping/Program.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Knot.Configuration;
+using Knot.Extensions;
+
+namespace Knot.Samples.CollectionMapping;
+
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        Console.WriteLine("Knot Collection Mapping Example\n");
+
+        // Sample data
+        var books = new List<Book>
+        {
+            new Book { Id = 1, Title = "1984", Author = "George Orwell" },
+            new Book { Id = 2, Title = "Brave New World", Author = "Aldous Huxley" },
+            new Book { Id = 3, Title = "Fahrenheit 451", Author = "Ray Bradbury" }
+        };
+
+        // Configure mapping
+        Mapper.Initialize(cfg =>
+        {
+            cfg.CreateMap<Book, BookDto>();
+        });
+
+        // Map to List<T>
+        List<BookDto> bookDtoList = books.MapToList<Book, BookDto>(mapper);
+
+        // Map to Array
+        BookDto[] bookDtoArray = books.MapToArray<Book, BookDto>(mapper);
+
+        // Map to IEnumerable<T>
+        IEnumerable<BookDto> bookDtoEnumerable = books.MapTo<Book, BookDto>(mapper);
+
+        Console.WriteLine("Mapping successful!");
+    }
+}
+```
+
+</details>
 
 **Location**: `samples/CollectionMapping/`
-
-```bash
-cd samples/CollectionMapping
-dotnet run
-```
 
 #### 4. MappingProfiles
 
@@ -1138,17 +1316,73 @@ dotnet run
 
 **Features**:
 
--   Creating and registering profiles
--   Domain-driven organization
--   Multiple profiles in one configuration
--   Security-conscious mapping (hiding sensitive data)
+- Creating and registering profiles
+- Domain-driven organization
+- Multiple profiles in one configuration
+- Security-conscious mapping (hiding sensitive data)
+
+<details>
+<summary><strong>Show Example Code</strong></summary>
+
+```csharp
+// samples/MappingProfiles/Program.cs
+using System;
+using System.Collections.Generic;
+using Knot.Configuration;
+using Knot.Extensions;
+
+namespace Knot.Samples.MappingProfiles;
+
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        Console.WriteLine("Knot Mapping Profiles Example\n");
+
+        // CreateMap Examples:
+
+public class UserProfile : Profile
+{
+    protected internal override void Configure()
+    {
+        CreateMap<User, UserDto>(map =>
+        {
+            map.ForMember(dest => dest.FullName, src => $"{src.FirstName} {src.LastName}");
+            map.Ignore(dest => dest.TempData);
+        });
+
+        CreateMap<UserDto, User>();
+    }
+}
+
+public class ProductProfile : Profile
+{
+    protected internal override void Configure()
+    {
+        CreateMap<Product, ProductDto>();
+        CreateMap<ProductDto, Product>();
+    }
+}
+
+// Usage in ASP.NET Core
+public void ConfigureServices(IServiceCollection services)
+{
+    var config = new MapperConfiguration(cfg =>
+    {
+        cfg.AddProfiles(typeof(Startup).Assembly);
+    });
+
+    services.AddSingleton(config.CreateMapper());
+}
+
+        Console.WriteLine("Profiles configured and registered successfully!");
+    }
+}
+```
+
+</details>
 
 **Location**: `samples/MappingProfiles/`
-
-```bash
-cd samples/MappingProfiles
-dotnet run
-```
 
 #### 5. NestedObjects
 
@@ -1156,17 +1390,67 @@ dotnet run
 
 **Features**:
 
--   Deep object hierarchies
--   Nested collections
--   One-to-many relationships
--   Enterprise domain model examples
+- Deep object hierarchies
+- Nested collections
+- One-to-many relationships
+- Enterprise domain model examples
+- Null and empty collection handling
+- Bidirectional and circular reference mapping
+- Performance with large datasets
+
+<details>
+<summary><strong>Show Example Code</strong></summary>
+
+```csharp
+// samples/NestedObjects/Program.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Knot.Configuration;
+
+namespace Knot.Samples.NestedObjects;
+
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        Console.WriteLine("Knot Comprehensive Nested Objects Mapping Tests\n");
+
+        // Sample data
+        var company = new Company
+        {
+            Departments = new List<Department>
+            {
+                new Department
+                {
+                    Employees = new List<Employee>
+                    {
+                        new Employee { FirstName = "Alice" },
+                        new Employee { FirstName = "Bob" }
+                    }
+                }
+            }
+        };
+
+        // Configure mapping
+        var config = new MapperConfiguration(cfg =>
+        {
+            cfg.CreateMap<Company, CompanyDto>();
+            cfg.CreateMap<Department, DepartmentDto>();
+            cfg.CreateMap<Employee, EmployeeDto>();
+        });
+
+        // Map
+        var companyDto = mapper.Map<CompanyDto>(company);
+
+        Console.WriteLine("Mapping successful!");
+    }
+}
+```
+
+</details>
 
 **Location**: `samples/NestedObjects/`
-
-```bash
-cd samples/NestedObjects
-dotnet run
-```
 
 ### Building All Samples
 
@@ -1287,7 +1571,7 @@ public class ProductsController : ControllerBase
     public ProductsController(IProductService productService, IMapper mapper)
     {
         _productService = productService;
-      _mapper = mapper;
+        _mapper = mapper;
     }
 
     [HttpGet]
@@ -1324,8 +1608,6 @@ public class ProductsController : ControllerBase
 ```
 
 ### Example 2: Complex Domain Mapping
-
-**Entities:**
 
 ```csharp
 public class Order
