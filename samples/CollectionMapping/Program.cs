@@ -38,7 +38,7 @@ public class Program
         Console.WriteLine("Mapped Results:");
         foreach (var dto in customerDtos)
         {
-            Console.WriteLine($"  ID: {dto.Id} | {dto.Name} | {dto.Email} | Active: {dto.Active}");
+            Console.WriteLine($" ID: {dto.Id} | {dto.Name} | {dto.Email} | Active: {dto.Active}");
         }
         Console.WriteLine("Status:             All customers mapped successfully\n");
 
@@ -58,7 +58,7 @@ public class Program
         Console.WriteLine("Mapped Results:");
         foreach (var dto in orderArray)
         {
-            Console.WriteLine($"  {dto.OrderNumber} | Amount: ${dto.Amount:F2} | Status: {dto.Status}");
+            Console.WriteLine($" {dto.OrderNumber} | Amount: ${dto.Amount:F2} | Status: {dto.Status}");
         }
         Console.WriteLine("Status:             All orders mapped to array successfully\n");
 
@@ -85,7 +85,7 @@ public class Program
         Console.WriteLine("Mapped Results (sorted by price):");
         foreach (var dto in inStockProducts)
         {
-            Console.WriteLine($"  {dto.Name,-20} ${dto.Price,8:F2}");
+            Console.WriteLine($" {dto.Name,-20} ${dto.Price,8:F2}");
         }
         Console.WriteLine("Status:             Filtered and mapped successfully\n");
 

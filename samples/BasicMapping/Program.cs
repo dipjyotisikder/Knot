@@ -52,9 +52,9 @@ internal class Program
         var employeeDto = mapper.Map<EmployeeDto>(employee);
 
         Console.WriteLine($"Source object:  ID: {employee.Id}, Name: {employee.FirstName} {employee.LastName}");
-        Console.WriteLine($"                Salary: ${employee.Salary:N2}, Email: {employee.Email}");
+        Console.WriteLine($"               Salary: ${employee.Salary:N2}, Email: {employee.Email}");
         Console.WriteLine($"Mapped result:  ID: {employeeDto.Id}, Name: {employeeDto.FirstName} {employeeDto.LastName}");
-        Console.WriteLine($"                Email: {employeeDto.Email}");
+        Console.WriteLine($"               Email: {employeeDto.Email}");
         Console.WriteLine("Note:           Salary property not mapped (not present in destination DTO)\n");
 
         // Example 3: Mapping to existing instance

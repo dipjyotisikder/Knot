@@ -60,7 +60,7 @@ public class Program
         Console.WriteLine("Product Catalog:");
         foreach (var dto in productDtos)
         {
-            Console.WriteLine($"  [{dto.Id}] {dto.Name,-25} ${dto.Price,8:F2} | {dto.Availability}");
+            Console.WriteLine($" [{dto.Id}] {dto.Name,-25} ${dto.Price,8:F2} | {dto.Availability}");
         }
         Console.WriteLine("Profile Applied:    ProductMappingProfile\n");
 

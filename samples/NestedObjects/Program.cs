@@ -61,8 +61,8 @@ public class Program
 
         var dto = mapper.Map<CompanyDto>(company);
 
-        Console.WriteLine($"✓ Company mapped: {dto.Name}");
-        Console.WriteLine($"✓ Nested Address mapped: {dto.Headquarters.Street}, {dto.Headquarters.City}");
+        Console.WriteLine($"Company mapped: {dto.Name}");
+        Console.WriteLine($"Nested Address mapped: {dto.Headquarters?.Street}, {dto.Headquarters?.City}");
         Console.WriteLine($"Result: PASS - Basic nested object mapping works\n");
     }
 
@@ -111,10 +111,10 @@ public class Program
 
         var dto = mapper.Map<CompanyDto>(company);
 
-        Console.WriteLine($"✓ Level 1 (Company): {dto.Name}");
-        Console.WriteLine($"✓ Level 2 (Department): {dto.Departments[0].Name}");
-        Console.WriteLine($"✓ Level 3 (Manager): {dto.Departments[0].Manager.FirstName} {dto.Departments[0].Manager.LastName}");
-        Console.WriteLine($"✓ Level 3 (Employees): {dto.Departments[0].Employees.Count} mapped");
+        Console.WriteLine($"Level 1 (Company): {dto.Name}");
+        Console.WriteLine($"Level 2 (Department): {dto.Departments[0].Name}");
+        Console.WriteLine($"Level 3 (Manager): {dto.Departments[0].Manager?.FirstName} {dto.Departments[0].Manager?.LastName}");
+        Console.WriteLine($"Level 3 (Employees): {dto.Departments[0].Employees.Count} mapped");
         Console.WriteLine($"Result: PASS - Deep hierarchy mapping works (3 levels)\n");
     }
 
@@ -145,10 +145,10 @@ public class Program
 
         var dto = mapper.Map<CompanyDto>(company);
 
-        Console.WriteLine($"✓ Source collection count: {company.ActiveProjects.Count}");
-        Console.WriteLine($"✓ Mapped collection count: {dto.ActiveProjects.Count}");
-        Console.WriteLine($"✓ First project: {dto.ActiveProjects[0].Name}");
-        Console.WriteLine($"✓ Last project: {dto.ActiveProjects[2].Name}");
+        Console.WriteLine($"Source collection count: {company.ActiveProjects.Count}");
+        Console.WriteLine($"Mapped collection count: {dto.ActiveProjects.Count}");
+        Console.WriteLine($"First project: {dto.ActiveProjects[0].Name}");
+        Console.WriteLine($"Last project: {dto.ActiveProjects[2].Name}");
         Console.WriteLine($"Result: PASS - List<T> collection mapping works\n");
     }
 
@@ -178,9 +178,9 @@ public class Program
 
         var dto = mapper.Map<CompanyWithArraysDto>(company);
 
-        Console.WriteLine($"✓ Source array length: {company.TopExecutives.Length}");
-        Console.WriteLine($"✓ Mapped array length: {dto.TopExecutives.Length}");
-        Console.WriteLine($"✓ First executive: {dto.TopExecutives[0].FirstName} {dto.TopExecutives[0].LastName}");
+        Console.WriteLine($"Source array length: {company.TopExecutives.Length}");
+        Console.WriteLine($"Mapped array length: {dto.TopExecutives.Length}");
+        Console.WriteLine($"First executive: {dto.TopExecutives[0].FirstName} {dto.TopExecutives[0].LastName}");
         Console.WriteLine($"Result: PASS - Array mapping works\n");
     }
 
@@ -210,7 +210,7 @@ public class Program
         try
         {
             var dto1 = mapper.Map<CompanyDto>(company1);
-            Console.WriteLine($"✓ Null nested object handled: Headquarters = {(dto1.Headquarters == null ? "null" : "not null")}");
+            Console.WriteLine($"Null nested object handled: Headquarters = {(dto1.Headquarters == null ? "null" : "not null")}");
         }
         catch (Exception ex)
         {
@@ -234,7 +234,7 @@ public class Program
         try
         {
             var dto2 = mapper.Map<CompanyDto>(company2);
-            Console.WriteLine($"✓ Collection with nulls handled: {dto2.Departments.Count} departments");
+            Console.WriteLine($"Collection with nulls handled: {dto2.Departments.Count} departments");
         }
         catch (Exception ex)
         {
@@ -268,8 +268,8 @@ public class Program
 
         var dto = mapper.Map<CompanyDto>(company);
 
-        Console.WriteLine($"✓ Empty Departments collection: {dto.Departments.Count} items");
-        Console.WriteLine($"✓ Empty Projects collection: {dto.ActiveProjects.Count} items");
+        Console.WriteLine($"Empty Departments collection: {dto.Departments.Count} items");
+        Console.WriteLine($"Empty Projects collection: {dto.ActiveProjects.Count} items");
         Console.WriteLine($"Result: PASS - Empty collection mapping works\n");
     }
 
@@ -297,11 +297,11 @@ public class Program
         };
 
         var dto = mapper.Map<EmployeeDto>(employee);
-        Console.WriteLine($"✓ Forward mapping: {dto.FirstName} {dto.LastName}, {dto.Title}");
+        Console.WriteLine($"Forward mapping: {dto.FirstName} {dto.LastName}, {dto.Title}");
 
         // Reverse mapping
         var employeeBack = mapper.Map<Employee>(dto);
-        Console.WriteLine($"✓ Reverse mapping: {employeeBack.FirstName} {employeeBack.LastName}, {employeeBack.Title}");
+        Console.WriteLine($"Reverse mapping: {employeeBack.FirstName} {employeeBack.LastName}, {employeeBack.Title}");
         Console.WriteLine($"Result: PASS - Bidirectional mapping works\n");
     }
 
@@ -331,8 +331,8 @@ public class Program
 
         var destination = mapper.Map<MixedCollectionDestination>(source);
 
-        Console.WriteLine($"✓ List -> List: {destination.ListEmployees.Count} items");
-        Console.WriteLine($"✓ Array -> Array: {destination.ArrayEmployees.Length} items");
+        Console.WriteLine($"List -> List: {destination.ListEmployees.Count} items");
+        Console.WriteLine($"Array -> Array: {destination.ArrayEmployees.Length} items");
         Console.WriteLine($"Result: PASS - Mixed collection type mapping works\n");
     }
 
@@ -364,8 +364,8 @@ public class Program
         try
         {
             var dto = mapper.Map<DepartmentDto>(dept);
-            Console.WriteLine($"✓ Complex object graph mapped without circular reference issues");
-            Console.WriteLine($"✓ Department: {dto.Name}, Manager: {dto.Manager.FirstName}, Employees: {dto.Employees.Count}");
+            Console.WriteLine($"Complex object graph mapped without circular reference issues");
+            Console.WriteLine($"Department: {dto.Name}, Manager: {dto?.Manager?.FirstName}, Employees: {dto?.Employees.Count}");
             Console.WriteLine($"Result: PASS - No circular reference issues\n");
         }
         catch (StackOverflowException)
@@ -428,11 +428,11 @@ public class Program
 
         int totalEmployees = dto.Departments.Sum(d => d.Employees.Count + 1); // +1 for manager
 
-        Console.WriteLine($"✓ Departments mapped: {dto.Departments.Count}");
-        Console.WriteLine($"✓ Total employees mapped: {totalEmployees}");
-        Console.WriteLine($"✓ Total objects mapped: {1 + dto.Departments.Count + totalEmployees}");
-        Console.WriteLine($"✓ Time taken: {elapsed:F2}ms");
-        Console.WriteLine($"✓ Average per object: {elapsed / (1 + dto.Departments.Count + totalEmployees):F4}ms");
+        Console.WriteLine($"Departments mapped: {dto.Departments.Count}");
+        Console.WriteLine($"Total employees mapped: {totalEmployees}");
+        Console.WriteLine($"Total objects mapped: {1 + dto.Departments.Count + totalEmployees}");
+        Console.WriteLine($"Time taken: {elapsed:F2}ms");
+        Console.WriteLine($"Average per object: {elapsed / (1 + dto.Departments.Count + totalEmployees):F4}ms");
         Console.WriteLine($"Result: PASS - Performance test completed\n");
     }
 
@@ -524,18 +524,18 @@ public class Program
         var elapsed = (DateTime.Now - startTime).TotalMilliseconds;
 
         // Verify each level was mapped correctly
-        Console.WriteLine($"✓ Level 1: {dto.Name} (ID: {dto.Id})");
-        Console.WriteLine($"✓ Level 2: {dto.Level2?.Name} (ID: {dto.Level2?.Id})");
-        Console.WriteLine($"✓ Level 3: {dto.Level2?.Level3?.Name} (ID: {dto.Level2?.Level3?.Id})");
-        Console.WriteLine($"✓ Level 4: {dto.Level2?.Level3?.Level4?.Name} (ID: {dto.Level2?.Level3?.Level4?.Id})");
-        Console.WriteLine($"✓ Level 5: {dto.Level2?.Level3?.Level4?.Level5?.Name} (ID: {dto.Level2?.Level3?.Level4?.Level5?.Id})");
-        Console.WriteLine($"✓ Level 6: {dto.Level2?.Level3?.Level4?.Level5?.Level6?.Name} (ID: {dto.Level2?.Level3?.Level4?.Level5?.Level6?.Id})");
-        Console.WriteLine($"✓ Level 7: {dto.Level2?.Level3?.Level4?.Level5?.Level6?.Level7?.Name} (ID: {dto.Level2?.Level3?.Level4?.Level5?.Level6?.Level7?.Id})");
-        Console.WriteLine($"✓ Level 8: {dto.Level2?.Level3?.Level4?.Level5?.Level6?.Level7?.Level8?.Name} (ID: {dto.Level2?.Level3?.Level4?.Level5?.Level6?.Level7?.Level8?.Id})");
-        Console.WriteLine($"✓ Level 9: {dto.Level2?.Level3?.Level4?.Level5?.Level6?.Level7?.Level8?.Level9?.Name} (ID: {dto.Level2?.Level3?.Level4?.Level5?.Level6?.Level7?.Level8?.Level9?.Id})");
-        Console.WriteLine($"✓ Level 10: {dto.Level2?.Level3?.Level4?.Level5?.Level6?.Level7?.Level8?.Level9?.Level10?.Name} (ID: {dto.Level2?.Level3?.Level4?.Level5?.Level6?.Level7?.Level8?.Level9?.Level10?.Id})");
-        Console.WriteLine($"✓ Level 10 Data: {dto.Level2?.Level3?.Level4?.Level5?.Level6?.Level7?.Level8?.Level9?.Level10?.Data}");
-        Console.WriteLine($"✓ Time taken: {elapsed:F2}ms");
+        Console.WriteLine($"Level 1: {dto.Name} (ID: {dto.Id})");
+        Console.WriteLine($"Level 2: {dto.Level2?.Name} (ID: {dto.Level2?.Id})");
+        Console.WriteLine($"Level 3: {dto.Level2?.Level3?.Name} (ID: {dto.Level2?.Level3?.Id})");
+        Console.WriteLine($"Level 4: {dto.Level2?.Level3?.Level4?.Name} (ID: {dto.Level2?.Level3?.Level4?.Id})");
+        Console.WriteLine($"Level 5: {dto.Level2?.Level3?.Level4?.Level5?.Name} (ID: {dto.Level2?.Level3?.Level4?.Level5?.Id})");
+        Console.WriteLine($"Level 6: {dto.Level2?.Level3?.Level4?.Level5?.Level6?.Name} (ID: {dto.Level2?.Level3?.Level4?.Level5?.Level6?.Id})");
+        Console.WriteLine($"Level 7: {dto.Level2?.Level3?.Level4?.Level5?.Level6?.Level7?.Name} (ID: {dto.Level2?.Level3?.Level4?.Level5?.Level6?.Level7?.Id})");
+        Console.WriteLine($"Level 8: {dto.Level2?.Level3?.Level4?.Level5?.Level6?.Level7?.Level8?.Name} (ID: {dto.Level2?.Level3?.Level4?.Level5?.Level6?.Level7?.Level8?.Id})");
+        Console.WriteLine($"Level 9: {dto.Level2?.Level3?.Level4?.Level5?.Level6?.Level7?.Level8?.Level9?.Name} (ID: {dto.Level2?.Level3?.Level4?.Level5?.Level6?.Level7?.Level8?.Level9?.Id})");
+        Console.WriteLine($"Level 10: {dto.Level2?.Level3?.Level4?.Level5?.Level6?.Level7?.Level8?.Level9?.Level10?.Name} (ID: {dto.Level2?.Level3?.Level4?.Level5?.Level6?.Level7?.Level8?.Level9?.Level10?.Id})");
+        Console.WriteLine($"Level 10 Data: {dto.Level2?.Level3?.Level4?.Level5?.Level6?.Level7?.Level8?.Level9?.Level10?.Data}");
+        Console.WriteLine($"Time taken: {elapsed:F2}ms");
         Console.WriteLine($"Result: PASS - 10-level deep hierarchy mapping works\n");
     }
 }
