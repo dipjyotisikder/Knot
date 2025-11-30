@@ -12,10 +12,22 @@ namespace Knot.Benchmarks
     [RankColumn]
     public class KnotVsAutoMapperSimpleBenchmarks
     {
+        /// <summary>
+        /// The Knot mapper instance.
+        /// </summary>
         private IMapper _knotMapper;
+        /// <summary>
+        /// The AutoMapper mapper instance.
+        /// </summary>
         private global::AutoMapper.IMapper _autoMapper;
+        /// <summary>
+        /// The source object for mapping.
+        /// </summary>
         private SimpleSource _source;
 
+        /// <summary>
+        /// Performs one-time setup for the benchmark by initializing mapping configurations and test data.
+        /// </summary>
         [GlobalSetup]
         public void Setup()
         {
@@ -106,12 +118,30 @@ namespace Knot.Benchmarks
     [RankColumn]
     public class KnotVsAutoMapperCollectionBenchmarks
     {
+        /// <summary>
+        /// The Knot mapper instance.
+        /// </summary>
         private IMapper _knotMapper;
+        /// <summary>
+        /// The AutoMapper mapper instance.
+        /// </summary>
         private global::AutoMapper.IMapper _autoMapper;
+        /// <summary>
+        /// Small collection of source objects.
+        /// </summary>
         private List<SimpleSource> _smallCollection;
+        /// <summary>
+        /// Medium collection of source objects.
+        /// </summary>
         private List<SimpleSource> _mediumCollection;
+        /// <summary>
+        /// Large collection of source objects.
+        /// </summary>
         private List<SimpleSource> _largeCollection;
 
+        /// <summary>
+        /// Setup Collection Benchmark.
+        /// </summary>
         [GlobalSetup]
         public void Setup()
         {
@@ -244,10 +274,22 @@ namespace Knot.Benchmarks
     [RankColumn]
     public class KnotVsAutoMapperComplexBenchmarks
     {
+        /// <summary>
+        /// The Knot mapper instance.
+        /// </summary>
         private IMapper _knotMapper;
+        /// <summary>
+        /// The AutoMapper mapper instance.
+        /// </summary>
         private global::AutoMapper.IMapper _autoMapper;
+        /// <summary>
+        /// The complex source object for mapping.
+        /// </summary>
         private ComplexSource _source;
 
+        /// <summary>
+        /// Setup complex benchmark.
+        /// </summary>
         [GlobalSetup]
         public void Setup()
         {
@@ -430,8 +472,17 @@ namespace Knot.Benchmarks
     [RankColumn]
     public class KnotVsAutoMapperMemoryBenchmarks
     {
+        /// <summary>
+        /// The Knot mapper instance.
+        /// </summary>
         private IMapper _knotMapper;
+        /// <summary>
+        /// The AutoMapper mapper instance.
+        /// </summary>
         private global::AutoMapper.IMapper _autoMapper;
+        /// <summary>
+        /// The source object for mapping.
+        /// </summary>
         private SimpleSource _source;
 
         [GlobalSetup]

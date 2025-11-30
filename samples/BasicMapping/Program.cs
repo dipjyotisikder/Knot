@@ -83,18 +83,18 @@ internal class Program
 // Source Models
 public class Person
 {
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
+    public string FirstName { get; set; } = string.Empty;
+    public string LastName { get; set; } = string.Empty;
     public int Age { get; set; }
-    public string Email { get; set; }
+    public string Email { get; set; } = string.Empty;
 }
 
 public class Employee
 {
     public int Id { get; set; }
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
-    public string Email { get; set; }
+    public string FirstName { get; set; } = string.Empty;
+    public string LastName { get; set; } = string.Empty;
+    public string Email { get; set; } = string.Empty;
     public decimal Salary { get; set; }
     public DateTime HireDate { get; set; }
 }
@@ -102,17 +102,17 @@ public class Employee
 // Destination DTOs
 public class PersonDto
 {
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
+    public string FirstName { get; set; } = string.Empty;
+    public string LastName { get; set; } = string.Empty;
     public int Age { get; set; }
-    public string Email { get; set; }
+    public string Email { get; set; } = string.Empty;
 }
 
 public class EmployeeDto
 {
     public int Id { get; set; }
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
-    public string Email { get; set; }
+    public string FirstName { get; set; } = string.Empty;
+    public string LastName { get; set; } = string.Empty;
+    public string Email { get; set; } = string.Empty;
     // Note: Salary and HireDate are intentionally omitted
 }

@@ -34,7 +34,7 @@ public class Program
 
         var customerDtos = customers.MapToList<Customer, CustomerDto>(mapper);
 
-        Console.WriteLine($"Collection Size:    {customerDtos.Count} customers");
+        Console.WriteLine($"Collection Size:    {customerDtos?.Count} customers");
         Console.WriteLine("Mapped Results:");
         foreach (var dto in customerDtos)
         {
