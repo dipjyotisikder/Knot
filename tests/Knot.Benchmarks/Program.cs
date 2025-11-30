@@ -10,12 +10,12 @@ namespace Knot.Benchmarks
 
             Console.WriteLine("Select benchmark to run:");
             Console.WriteLine("0. Quick Performance Test (fast check)");
-            Console.WriteLine("1. Simple mapping benchmarks");
-            Console.WriteLine("2. Collection mapping benchmarks");
-            Console.WriteLine("3. Complex mapping benchmarks");
-            Console.WriteLine("4. Configuration benchmarks");
-            Console.WriteLine("5. Memory allocation benchmarks");
-            Console.WriteLine("6. Run all benchmarks");
+            Console.WriteLine("1. Knot vs AutoMapper: Simple mapping");
+            Console.WriteLine("2. Knot vs AutoMapper: Collection mapping");
+            Console.WriteLine("3. Knot vs AutoMapper: Complex mapping");
+            Console.WriteLine("4. Knot vs AutoMapper: Configuration");
+            Console.WriteLine("5. Knot vs AutoMapper: Memory allocation");
+            Console.WriteLine("6. Run all Knot vs AutoMapper benchmarks");
             Console.WriteLine("9. Exit");
 
             if (args.Length == 0)
@@ -29,28 +29,28 @@ namespace Knot.Benchmarks
                         QuickPerformanceTest.RunQuickTest();
                         break;
                     case "1":
-                        BenchmarkRunner.Run<SimpleMappingBenchmarks>();
+                        BenchmarkRunner.Run<KnotVsAutoMapperSimpleBenchmarks>();
                         break;
                     case "2":
-                        BenchmarkRunner.Run<CollectionMappingBenchmarks>();
+                        BenchmarkRunner.Run<KnotVsAutoMapperCollectionBenchmarks>();
                         break;
                     case "3":
-                        BenchmarkRunner.Run<ComplexMappingBenchmarks>();
+                        BenchmarkRunner.Run<KnotVsAutoMapperComplexBenchmarks>();
                         break;
                     case "4":
-                        BenchmarkRunner.Run<ConfigurationBenchmarks>();
+                        BenchmarkRunner.Run<KnotVsAutoMapperConfigurationBenchmarks>();
                         break;
                     case "5":
-                        BenchmarkRunner.Run<MemoryAllocationBenchmarks>();
+                        BenchmarkRunner.Run<KnotVsAutoMapperMemoryBenchmarks>();
                         break;
                     case "6":
-                        RunAllBenchmarks();
+                        BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(args);
                         break;
                     case "9":
                         return;
                     default:
-                        Console.WriteLine("Invalid choice; running quick test.");
-                        QuickPerformanceTest.RunQuickTest();
+                        Console.WriteLine("Invalid choice; running all Knot vs AutoMapper benchmarks.");
+                        BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(args);
                         break;
                 }
             }
@@ -58,17 +58,6 @@ namespace Knot.Benchmarks
             {
                 BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(args);
             }
-        }
-
-        static void RunAllBenchmarks()
-        {
-            Console.WriteLine("Running all benchmarks...");
-
-            BenchmarkRunner.Run<SimpleMappingBenchmarks>();
-            BenchmarkRunner.Run<CollectionMappingBenchmarks>();
-            BenchmarkRunner.Run<ComplexMappingBenchmarks>();
-            BenchmarkRunner.Run<ConfigurationBenchmarks>();
-            BenchmarkRunner.Run<MemoryAllocationBenchmarks>();
         }
     }
 }
